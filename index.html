@@ -1,16 +1,108 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>ToolHub</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ToolHub - Free Online Tools</title>
+<style>
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f4f4f4;
+}
+header{
+background:#111827;
+color:white;
+padding:20px;
+text-align:center;
+}
+.hero{
+padding:60px 20px;
+text-align:center;
+background:white;
+}
+.hero h1{
+font-size:48px;
+margin-bottom:10px;
+}
+.hero p{
+font-size:20px;
+color:#666;
+}
+.tools{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+padding:40px;
+}
+.card{
+background:white;
+padding:25px;
+border-radius:12px;
+box-shadow:0 2px 10px rgba(0,0,0,0.1);
+text-align:center;
+}
+.card h3{
+margin-top:0;
+}
+.btn{
+display:inline-block;
+padding:10px 20px;
+background:#2563eb;
+color:white;
+text-decoration:none;
+border-radius:6px;
+}
+footer{
+background:#111827;
+color:white;
+text-align:center;
+padding:15px;
+}
+</style>
 </head>
-<body style="font-family:Arial;text-align:center;padding:50px;">
-    <h1>Welcome to ToolHub</h1>
-    <p>Free Online Image & PDF Tools</p>
+<body>
 
-    <h2>Tools</h2>
-    <button>Background Remover</button>
-    <button>Image Compressor</button>
-    <button>JPG to PDF</button>
-    <button>PDF to JPG</button>
+<header>
+<h2>🚀 ToolHub</h2>
+</header>
+
+<section class="hero">
+<h1>Free Online Image & PDF Tools</h1>
+<p>Edit images and PDFs easily with ToolHub.</p>
+</section>
+
+<section class="tools">
+
+<div class="card">
+<h3>🖼 Background Remover</h3>
+<p>Remove image backgrounds instantly.</p>
+<a href="#" class="btn">Coming Soon</a>
+</div>
+
+<div class="card">
+<h3>📄 JPG to PDF</h3>
+<p>Convert images into PDF files.</p>
+<a href="#" class="btn">Coming Soon</a>
+</div>
+
+<div class="card">
+<h3>📑 PDF to JPG</h3>
+<p>Convert PDF pages into images.</p>
+<a href="#" class="btn">Coming Soon</a>
+</div>
+
+<div class="card">
+<h3>⚡ Image Compressor</h3>
+<p>Reduce image size without losing quality.</p>
+<a href="#" class="btn">Coming Soon</a>
+</div>
+
+</section>
+
+<footer>
+© 2026 ToolHub - All Rights Reserved
+</footer>
+
 </body>
 </html>
