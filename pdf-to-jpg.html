@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PDF to JPG - ToolHub</title>
+<title>PDF to JPG Converter - ToolHub</title>
 
 <style>
 body{
@@ -16,11 +16,11 @@ text-align:center;
 }
 
 .container{
-max-width:800px;
+max-width:1000px;
 margin:auto;
 background:white;
 padding:30px;
-border-radius:12px;
+border-radius:15px;
 box-shadow:0 4px 12px rgba(0,0,0,0.1);
 }
 
@@ -32,9 +32,16 @@ input{
 margin:20px 0;
 }
 
+.page{
+margin:30px 0;
+padding:15px;
+border:1px solid #ddd;
+border-radius:10px;
+}
+
 canvas{
 max-width:100%;
-margin-top:20px;
+height:auto;
 border:1px solid #ddd;
 }
 
@@ -45,7 +52,7 @@ background:#2563eb;
 color:white;
 text-decoration:none;
 border-radius:8px;
-margin-top:20px;
+margin-top:15px;
 }
 
 .back{
@@ -63,15 +70,7 @@ text-decoration:none;
 
 <input type="file" id="pdfFile" accept="application/pdf">
 
-<br>
-
-<canvas id="pdfCanvas"></canvas>
-
-<br>
-
-<a id="downloadBtn" class="btn" style="display:none;">Download JPG</a>
-
-<br>
+<div id="pages"></div>
 
 <a href="index.html" class="back">⬅ Back to Home</a>
 
@@ -80,49 +79,70 @@ text-decoration:none;
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
 <script>
+
 const pdfFile = document.getElementById('pdfFile');
-const canvas = document.getElementById('pdfCanvas');
-const ctx = canvas.getContext('2d');
-const downloadBtn = document.getElementById('downloadBtn');
+const pagesContainer = document.getElementById('pages');
 
 pdfFile.addEventListener('change', async function(){
+
+pagesContainer.innerHTML = '';
 
 const file = this.files[0];
 
 if(!file) return;
 
-const fileReader = new FileReader();
+const reader = new FileReader();
 
-fileReader.onload = async function(){
+reader.onload = async function(){
 
 const typedarray = new Uint8Array(this.result);
 
 const pdf = await pdfjsLib.getDocument(typedarray).promise;
 
-const page = await pdf.getPage(1);
+for(let pageNum = 1; pageNum <= pdf.numPages; pageNum++){
 
-const viewport = page.getViewport({scale:1.5});
+const page = await pdf.getPage(pageNum);
 
-canvas.height = viewport.height;
+const viewport = page.getViewport({ scale: 4 });
+
+const canvas = document.createElement('canvas');
+const ctx = canvas.getContext('2d');
+
 canvas.width = viewport.width;
+canvas.height = viewport.height;
 
 await page.render({
-canvasContext:ctx,
-viewport:viewport
+canvasContext: ctx,
+viewport: viewport
 }).promise;
 
-downloadBtn.style.display='inline-block';
+const wrapper = document.createElement('div');
+wrapper.className = 'page';
 
-downloadBtn.onclick=function(){
-const image = canvas.toDataURL("image/jpeg",1.0);
-downloadBtn.href=image;
-downloadBtn.download="page1.jpg";
-};
+const title = document.createElement('h3');
+title.textContent = 'Page ' + pageNum;
+
+const download = document.createElement('a');
+download.className = 'btn';
+download.textContent = 'Download JPG';
+download.href = canvas.toDataURL('image/jpeg',1.0);
+download.download = 'page-' + pageNum + '.jpg';
+
+wrapper.appendChild(title);
+wrapper.appendChild(canvas);
+wrapper.appendChild(document.createElement('br'));
+wrapper.appendChild(download);
+
+pagesContainer.appendChild(wrapper);
+
+}
+
 };
 
-fileReader.readAsArrayBuffer(file);
+reader.readAsArrayBuffer(file);
 
 });
+
 </script>
 
 </body>
