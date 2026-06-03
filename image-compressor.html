@@ -1,0 +1,251 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Compressor - ToolHub</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f5f7fb;
+padding:20px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 4px 15px rgba(0,0,0,0.1);
+text-align:center;
+}
+
+h1{
+color:#111827;
+margin-bottom:10px;
+}
+
+p{
+color:#666;
+margin-bottom:20px;
+}
+
+input[type=file]{
+margin:20px 0;
+}
+
+.preview{
+margin-top:20px;
+}
+
+.preview img{
+max-width:100%;
+max-height:400px;
+border-radius:10px;
+border:1px solid #ddd;
+}
+
+.slider-container{
+margin:25px 0;
+}
+
+input[type=range]{
+width:100%;
+max-width:400px;
+}
+
+.info{
+margin-top:20px;
+font-size:16px;
+line-height:1.8;
+}
+
+.btn{
+display:inline-block;
+padding:12px 24px;
+background:#2563eb;
+color:white;
+text-decoration:none;
+border:none;
+border-radius:8px;
+cursor:pointer;
+margin-top:20px;
+font-size:16px;
+}
+
+.btn:hover{
+background:#1d4ed8;
+}
+
+.back{
+display:inline-block;
+margin-top:20px;
+text-decoration:none;
+color:#2563eb;
+}
+
+.success{
+color:green;
+font-weight:bold;
+margin-top:15px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>⚡ Image Compressor</h1>
+<p>Compress JPG, PNG and WEBP images instantly.</p>
+
+<input type="file" id="imageInput" accept="image/*">
+
+<div class="preview">
+<img id="previewImage" style="display:none;">
+</div>
+
+<div class="slider-container">
+<label>
+Compression Quality:
+<span id="qualityValue">80%</span>
+</label>
+<br><br>
+<input type="range" id="qualitySlider" min="10" max="100" value="80">
+</div>
+
+<div class="info">
+<div id="originalSize"></div>
+<div id="compressedSize"></div>
+</div>
+
+<button class="btn" onclick="compressImage()">
+Compress Image
+</button>
+
+<br>
+
+<a id="downloadBtn" class="btn" style="display:none;">
+Download Compressed Image
+</a>
+
+<div class="success" id="status"></div>
+
+<br>
+
+<a href="index.html" class="back">
+⬅ Back to Home
+</a>
+
+</div>
+
+<script>
+
+const imageInput = document.getElementById("imageInput");
+const previewImage = document.getElementById("previewImage");
+const qualitySlider = document.getElementById("qualitySlider");
+const qualityValue = document.getElementById("qualityValue");
+const originalSize = document.getElementById("originalSize");
+const compressedSize = document.getElementById("compressedSize");
+const downloadBtn = document.getElementById("downloadBtn");
+const statusText = document.getElementById("status");
+
+let selectedFile = null;
+
+qualitySlider.addEventListener("input", () => {
+qualityValue.textContent = qualitySlider.value + "%";
+});
+
+imageInput.addEventListener("change", function(){
+
+selectedFile = this.files[0];
+
+if(!selectedFile) return;
+
+previewImage.src = URL.createObjectURL(selectedFile);
+previewImage.style.display = "block";
+
+originalSize.innerHTML =
+"📦 Original Size: " +
+(selectedFile.size / 1024).toFixed(2) +
+" KB";
+
+compressedSize.innerHTML = "";
+downloadBtn.style.display = "none";
+statusText.innerHTML = "";
+
+});
+
+function compressImage(){
+
+if(!selectedFile){
+
+alert("Please select an image.");
+return;
+
+}
+
+const quality = qualitySlider.value / 100;
+
+const reader = new FileReader();
+
+reader.onload = function(e){
+
+const img = new Image();
+
+img.onload = function(){
+
+const canvas = document.createElement("canvas");
+const ctx = canvas.getContext("2d");
+
+canvas.width = img.width;
+canvas.height = img.height;
+
+ctx.drawImage(img,0,0);
+
+canvas.toBlob(function(blob){
+
+const compressedKB =
+(blob.size / 1024).toFixed(2);
+
+compressedSize.innerHTML =
+"⚡ Compressed Size: " +
+compressedKB +
+" KB";
+
+downloadBtn.href =
+URL.createObjectURL(blob);
+
+downloadBtn.download =
+"toolhub-compressed.jpg";
+
+downloadBtn.style.display =
+"inline-block";
+
+statusText.innerHTML =
+"✅ Compression Complete";
+
+},"image/jpeg",quality);
+
+};
+
+img.src = e.target.result;
+
+};
+
+reader.readAsDataURL(selectedFile);
+
+}
+</script>
+
+</body>
+</html>
+```
