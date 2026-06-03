@@ -1,0 +1,130 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDF to JPG - ToolHub</title>
+
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#f5f7fb;
+margin:0;
+padding:20px;
+text-align:center;
+}
+
+.container{
+max-width:800px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:12px;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+h1{
+color:#111827;
+}
+
+input{
+margin:20px 0;
+}
+
+canvas{
+max-width:100%;
+margin-top:20px;
+border:1px solid #ddd;
+}
+
+.btn{
+display:inline-block;
+padding:12px 20px;
+background:#2563eb;
+color:white;
+text-decoration:none;
+border-radius:8px;
+margin-top:20px;
+}
+
+.back{
+display:inline-block;
+margin-top:20px;
+text-decoration:none;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>📑 PDF to JPG Converter</h1>
+
+<input type="file" id="pdfFile" accept="application/pdf">
+
+<br>
+
+<canvas id="pdfCanvas"></canvas>
+
+<br>
+
+<a id="downloadBtn" class="btn" style="display:none;">Download JPG</a>
+
+<br>
+
+<a href="index.html" class="back">⬅ Back to Home</a>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+<script>
+const pdfFile = document.getElementById('pdfFile');
+const canvas = document.getElementById('pdfCanvas');
+const ctx = canvas.getContext('2d');
+const downloadBtn = document.getElementById('downloadBtn');
+
+pdfFile.addEventListener('change', async function(){
+
+const file = this.files[0];
+
+if(!file) return;
+
+const fileReader = new FileReader();
+
+fileReader.onload = async function(){
+
+const typedarray = new Uint8Array(this.result);
+
+const pdf = await pdfjsLib.getDocument(typedarray).promise;
+
+const page = await pdf.getPage(1);
+
+const viewport = page.getViewport({scale:1.5});
+
+canvas.height = viewport.height;
+canvas.width = viewport.width;
+
+await page.render({
+canvasContext:ctx,
+viewport:viewport
+}).promise;
+
+downloadBtn.style.display='inline-block';
+
+downloadBtn.onclick=function(){
+const image = canvas.toDataURL("image/jpeg",1.0);
+downloadBtn.href=image;
+downloadBtn.download="page1.jpg";
+};
+};
+
+fileReader.readAsArrayBuffer(file);
+
+});
+</script>
+
+</body>
+</html>
+```
