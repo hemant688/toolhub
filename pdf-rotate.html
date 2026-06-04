@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PDF Rotate - ToolHub</title>
+
+<script src="https://unpkg.com/pdf-lib"></script>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f4f7fc;
+padding:20px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+h1{
+text-align:center;
+margin-bottom:10px;
+color:#111827;
+}
+
+.subtitle{
+text-align:center;
+color:#666;
+margin-bottom:30px;
+}
+
+.upload-box{
+border:3px dashed #2563eb;
+padding:40px;
+text-align:center;
+border-radius:15px;
+background:#f8fbff;
+margin-bottom:25px;
+}
+
+select{
+width:100%;
+padding:12px;
+border-radius:10px;
+margin-top:15px;
+margin-bottom:15px;
+}
+
+.rotate-btn{
+width:100%;
+padding:15px;
+background:#2563eb;
+border:none;
+color:white;
+font-size:18px;
+font-weight:bold;
+border-radius:10px;
+cursor:pointer;
+}
+
+.download{
+margin-top:20px;
+text-align:center;
+}
+
+.download a{
+display:inline-block;
+background:#22c55e;
+color:white;
+padding:12px 25px;
+text-decoration:none;
+border-radius:10px;
+}
+
+.status{
+margin-top:15px;
+text-align:center;
+font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🔄 PDF Rotate Tool</h1>
+
+<p class="subtitle">
+Rotate all PDF pages by 90°, 180° or 270°.
+</p>
+
+<div class="upload-box">
+
+<input
+type="file"
+id="pdfFile"
+accept=".pdf"
+>
+
+<select id="rotation">
+<option value="90">Rotate 90°</option>
+<option value="180">Rotate 180°</option>
+<option value="270">Rotate 270°</option>
+</select>
+
+</div>
+
+<button
+class="rotate-btn"
+onclick="rotatePDF()"
+>
+Rotate PDF
+</button>
+
+<div id="status" class="status"></div>
+
+<div id="download" class="download"></div>
+
+<script>
+async function rotatePDF(){
+
+const file =
+document.getElementById("pdfFile").files[0];
+
+if(!file){
+
+alert("Please select a PDF file.");
+
+return;
+
+}
+  const status =
+document.getElementById("status");
+
+const download =
+document.getElementById("download");
+
+download.innerHTML = "";
+
+status.innerHTML =
+"⏳ Rotating PDF...";
+
+try{
+
+const rotation =
+parseInt(
+document.getElementById("rotation").value
+);
+
+const bytes =
+await file.arrayBuffer();
+
+const pdfDoc =
+await PDFLib.PDFDocument.load(bytes);
+
+const pages =
+pdfDoc.getPages();
+
+pages.forEach(page=>{
+
+page.setRotation(
+PDFLib.degrees(rotation)
+);
+
+});
+
+const pdfBytes =
+await pdfDoc.save();
+
+const blob =
+new Blob(
+[pdfBytes],
+{
+type:"application/pdf"
+}
+);
+
+const url =
+URL.createObjectURL(blob);
+
+download.innerHTML =
+
+`
+<a
+href="${url}"
+download="ToolHub-Rotated.pdf"
+>
+⬇ Download Rotated PDF
+</a>
+`;
+
+status.innerHTML =
+"✅ PDF rotated successfully.";
+
+}
+catch(error){
+
+console.error(error);
+
+status.innerHTML =
+"❌ Error rotating PDF.";
+
+}
+}
+  </script>
+
+</div>
+
+</body>
+</html>
