@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Image Cropper - ToolHub</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f4f7fc;
+padding:20px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+h1{
+text-align:center;
+margin-bottom:10px;
+color:#111827;
+}
+
+.subtitle{
+text-align:center;
+color:#666;
+margin-bottom:30px;
+}
+
+.upload-box{
+border:3px dashed #2563eb;
+padding:30px;
+text-align:center;
+border-radius:15px;
+background:#f8fbff;
+margin-bottom:20px;
+}
+
+canvas{
+max-width:100%;
+border:1px solid #ddd;
+margin-top:20px;
+}
+
+.controls{
+margin-top:20px;
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:10px;
+}
+
+input{
+padding:12px;
+border:1px solid #ddd;
+border-radius:8px;
+width:100%;
+}
+
+button{
+padding:14px;
+background:#2563eb;
+color:white;
+border:none;
+border-radius:10px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.download{
+margin-top:20px;
+text-align:center;
+}
+
+.download a{
+display:inline-block;
+background:#22c55e;
+color:white;
+padding:12px 25px;
+text-decoration:none;
+border-radius:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>✂️ Image Cropper</h1>
+
+<p class="subtitle">
+Crop JPG, PNG and WEBP images online.
+</p>
+
+<div class="upload-box">
+
+<input
+type="file"
+id="imageInput"
+accept="image/*"
+>
+
+</div>
+
+<canvas id="canvas"></canvas>
+
+<div class="controls">
+
+<input type="number" id="x" placeholder="X Position">
+
+<input type="number" id="y" placeholder="Y Position">
+
+<input type="number" id="width" placeholder="Width">
+
+<input type="number" id="height" placeholder="Height">
+
+</div>
+
+<br>
+
+<button onclick="cropImage()">
+Crop Image
+</button>
+
+<div id="download" class="download"></div>
+
+<script>
+
+let originalImage;
+
+const canvas =
+document.getElementById("canvas");
+
+const ctx =
+canvas.getContext("2d");
+
+document
+.getElementById("imageInput")
+.addEventListener("change",function(e){
+
+const file =
+e.target.files[0];
+
+const reader =
+new FileReader();
+
+reader.onload=function(event){
+
+originalImage =
+new Image();
+
+originalImage.onload=function(){
+
+canvas.width =
+originalImage.width;
+
+canvas.height =
+originalImage.height;
+
+ctx.drawImage(
+originalImage,
+0,
+0
+);
+
+};
+
+originalImage.src =
+event.target.result;
+
+};
+
+reader.readAsDataURL(file);
+
+});
+  function cropImage(){
+
+if(!originalImage){
+
+alert("Please upload an image.");
+
+return;
+
+}
+
+const x =
+parseInt(
+document.getElementById("x").value
+) || 0;
+
+const y =
+parseInt(
+document.getElementById("y").value
+) || 0;
+
+const width =
+parseInt(
+document.getElementById("width").value
+);
+
+const height =
+parseInt(
+document.getElementById("height").value
+);
+
+if(!width || !height){
+
+alert(
+"Please enter width and height."
+);
+
+return;
+
+}
+
+const cropCanvas =
+document.createElement("canvas");
+
+cropCanvas.width = width;
+cropCanvas.height = height;
+
+const cropCtx =
+cropCanvas.getContext("2d");
+
+cropCtx.drawImage(
+originalImage,
+x,
+y,
+width,
+height,
+0,
+0,
+width,
+height
+);
+
+canvas.width = width;
+canvas.height = height;
+
+ctx.clearRect(
+0,
+0,
+canvas.width,
+canvas.height
+);
+
+ctx.drawImage(
+cropCanvas,
+0,
+0
+);
+
+const imageUrl =
+cropCanvas.toDataURL(
+"image/png"
+);
+
+document
+.getElementById("download")
+.innerHTML =
+
+`
+<a
+href="${imageUrl}"
+download="cropped-image.png"
+>
+⬇ Download Cropped Image
+</a>
+`;
+
+}
+  </script>
+
+</div>
+
+</body>
+</html>
