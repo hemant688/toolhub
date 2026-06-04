@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDF to Word - ToolHub</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+<style>
+body{
+font-family:Arial;
+background:#f4f7fc;
+padding:20px;
+text-align:center;
+}
+
+.container{
+max-width:800px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+
+input,button{
+margin-top:15px;
+padding:12px;
+}
+
+button{
+background:#2563eb;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+#output{
+margin-top:20px;
+text-align:left;
+white-space:pre-wrap;
+border:1px solid #ddd;
+padding:15px;
+border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📄 PDF to Word Converter</h1>
+
+<p>Extract text from PDF and download as Word file</p>
+
+<input type="file" id="fileInput" accept=".pdf">
+
+<br>
+
+<button onclick="convert()">Convert to Word</button>
+
+<div id="output"></div>
+
+</div>
+
+<script>
+
+async function convert(){
+
+const file=document.getElementById("fileInput").files[0];
+
+if(!file){
+alert("Select PDF file");
+return;
+}
+
+document.getElementById("output").innerText="Processing...";
+
+const arrayBuffer=await file.arrayBuffer();
+
+const pdf=await pdfjsLib.getDocument({data:arrayBuffer}).promise;
+
+let textContent="";
+
+for(let i=1;i<=pdf.numPages;i++){
+
+const page=await pdf.getPage(i);
+
+const text=await page.getTextContent();
+
+const pageText=text.items.map(item=>item.str).join(" ");
+
+textContent += pageText + "\n\n";
+
+}
+
+const blob=new Blob([textContent],{
+type:"application/msword"
+});
+
+const url=URL.createObjectURL(blob);
+
+document.getElementById("output").innerHTML=`
+<a href="${url}" download="ToolHub-Word.doc">
+⬇ Download Word File
+</a>
+`;
+
+}
+
+</script>
+
+</body>
+</html>
