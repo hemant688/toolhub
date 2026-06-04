@@ -3,65 +3,72 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ToolHub - SaaS Tools Platform</title>
-
-<!-- Firebase (Auth) -->
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<title>ToolHub - Free Online Tools</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial;}
-body{background:#f5f7fb;color:#111827;}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f5f7fb;
+color:#111827;
+}
 
 /* NAV */
 nav{
 background:#0f172a;
 color:white;
-padding:15px;
+padding:15px 20px;
 display:flex;
 justify-content:space-between;
 align-items:center;
 flex-wrap:wrap;
 }
 
-nav h2{font-size:20px;}
+nav h2{
+font-size:22px;
+}
 
-.nav a{
+.nav-links a{
 color:white;
-margin:0 10px;
 text-decoration:none;
+margin:0 10px;
 font-size:14px;
 }
-
-/* BUTTONS */
-.btn{
-padding:8px 12px;
-border:none;
-border-radius:6px;
-cursor:pointer;
-}
-
-.login{background:#2563eb;color:white;}
-.logout{background:red;color:white;display:none;}
 
 /* HERO */
 .hero{
 text-align:center;
-padding:40px;
+padding:40px 20px;
 background:white;
 }
 
 .hero h1{font-size:34px;}
-.hero p{color:#666;margin-top:10px;}
+.hero p{color:#666;margin-top:10px;max-width:700px;margin:auto;}
 
 /* SEARCH */
-.search-box{text-align:center;margin:20px;}
+.search-box{
+text-align:center;
+margin:20px;
+}
+
 .search-box input{
-padding:12px;
 width:80%;
 max-width:500px;
+padding:12px;
 border:1px solid #ddd;
 border-radius:10px;
+}
+
+/* SECTION */
+.section-title{
+text-align:center;
+margin:30px 0 10px;
+font-size:20px;
 }
 
 /* GRID */
@@ -70,79 +77,87 @@ display:grid;
 grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 gap:20px;
 padding:20px;
+max-width:1200px;
+margin:auto;
 }
 
 /* CARD */
 .card{
 background:white;
 padding:18px;
-border-radius:12px;
-box-shadow:0 4px 12px rgba(0,0,0,0.1);
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
 transition:0.3s;
+position:relative;
 }
-.card:hover{transform:translateY(-5px);}
 
-.card h3{margin-bottom:5px;}
+.card:hover{
+transform:translateY(-6px);
+}
+
+.card h3{margin-bottom:8px;}
 .card p{font-size:13px;color:#666;margin-bottom:10px;}
 
-.open{
+.btn{
 display:inline-block;
-padding:8px 12px;
+padding:8px 14px;
 background:#2563eb;
 color:white;
 text-decoration:none;
-border-radius:6px;
+border-radius:8px;
 font-size:13px;
 }
 
-/* SECTIONS */
-.section-title{text-align:center;margin-top:30px;font-size:20px;}
-
-.about,.contact{
+/* ABOUT */
+.about{
 background:white;
-margin:30px;
-padding:20px;
-border-radius:10px;
+padding:40px 20px;
+text-align:center;
+margin-top:30px;
+}
+
+.about p{
+max-width:700px;
+margin:auto;
+color:#555;
+line-height:1.6;
+}
+
+/* CONTACT */
+.contact{
+padding:40px 20px;
 text-align:center;
 }
 
-.contact input,.contact textarea{
+.contact input,
+.contact textarea{
 width:90%;
 max-width:500px;
-padding:10px;
+padding:12px;
 margin:8px;
 border:1px solid #ddd;
 border-radius:8px;
 }
 
-/* MODAL */
-.modal{
-display:none;
-position:fixed;
-top:0;left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.6);
-justify-content:center;
-align-items:center;
+.contact button{
+background:#2563eb;
+color:white;
+padding:12px 20px;
+border:none;
+border-radius:8px;
+cursor:pointer;
 }
 
-.box{
-background:white;
-padding:20px;
-border-radius:10px;
-width:300px;
+/* FOOTER */
+footer{
 text-align:center;
+padding:20px;
+background:#0f172a;
+color:white;
+margin-top:40px;
 }
 
-.box input{
-width:100%;
-padding:10px;
-margin:8px 0;
-border:1px solid #ddd;
-}
-
-.close{float:right;cursor:pointer;color:red;}
+.hidden{display:none;}
 </style>
 </head>
 
@@ -152,143 +167,94 @@ border:1px solid #ddd;
 <nav>
 <h2>🚀 ToolHub</h2>
 
-<div class="nav">
+<div class="nav-links">
 <a href="#tools">Tools</a>
 <a href="#about">About</a>
 <a href="#contact">Contact</a>
-</div>
-
-<div>
-<button class="btn login" onclick="openLogin()">Login</button>
-<button class="btn logout" onclick="logout()">Logout</button>
 </div>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
-<h1>All Free SaaS Tools in One Place</h1>
-<p>PDF, Image, OCR, Background Remover, QR Generator & More</p>
+<h1>All Free Online Tools in One Place</h1>
+<p>PDF tools, image tools, OCR, background remover, QR generator and more — fast & free.</p>
 </div>
 
 <!-- SEARCH -->
 <div class="search-box">
-<input type="text" onkeyup="searchTools(this.value)" placeholder="Search tools...">
+<input type="text" id="search" placeholder="Search tools..." onkeyup="filterTools()">
 </div>
 
-<!-- TOOLS -->
-<h2 class="section-title">🔥 Tools</h2>
+<!-- PDF TOOLS -->
+<h2 class="section-title" id="tools">📄 PDF Tools</h2>
+<section class="tools">
 
-<section class="tools" id="tools">
+<div class="card"><h3>JPG to PDF</h3><p>Convert images</p><a class="btn" href="jpg-to-pdf.html">Open</a></div>
+<div class="card"><h3>PDF to JPG</h3><p>Convert pages</p><a class="btn" href="pdf-to-jpg.html">Open</a></div>
+<div class="card"><h3>PDF Merge</h3><p>Combine PDFs</p><a class="btn" href="pdf-merge.html">Open</a></div>
+<div class="card"><h3>PDF Split</h3><p>Split PDF</p><a class="btn" href="pdf-split.html">Open</a></div>
+<div class="card"><h3>PDF Rotate</h3><p>Rotate pages</p><a class="btn" href="pdf-rotate.html">Open</a></div>
+<div class="card"><h3>Word to PDF</h3><p>DOCX convert</p><a class="btn" href="word-to-pdf.html">Open</a></div>
+<div class="card"><h3>PDF to Word</h3><p>Extract text</p><a class="btn" href="pdf-to-word.html">Open</a></div>
 
-<div class="card"><h3>PDF Merge</h3><p>Combine PDFs</p><a class="open" href="pdf-merge.html">Open</a></div>
+</section>
 
-<div class="card"><h3>PDF Split</h3><p>Split PDF pages</p><a class="open" href="pdf-split.html">Open</a></div>
+<!-- IMAGE TOOLS -->
+<h2 class="section-title">🖼 Image Tools</h2>
+<section class="tools">
 
-<div class="card"><h3>Word to PDF</h3><p>DOCX convert</p><a class="open" href="word-to-pdf.html">Open</a></div>
+<div class="card"><h3>Image Resizer</h3><p>Resize image</p><a class="btn" href="image-resizer.html">Open</a></div>
+<div class="card"><h3>Image Cropper</h3><p>Crop image</p><a class="btn" href="image-cropper.html">Open</a></div>
+<div class="card"><h3>Image Enhancer</h3><p>Improve quality</p><a class="btn" href="image-enhancer.html">Open</a></div>
+<div class="card"><h3>Background Remover</h3><p>Remove BG</p><a class="btn" href="background-remover.html">Open</a></div>
+<div class="card"><h3>JPG to PNG</h3><p>Convert format</p><a class="btn" href="jpg-to-png.html">Open</a></div>
+<div class="card"><h3>Image to Text</h3><p>OCR tool</p><a class="btn" href="image-to-text.html">Open</a></div>
 
-<div class="card"><h3>PDF to Word</h3><p>Extract text</p><a class="open" href="pdf-to-word.html">Open</a></div>
+</section>
 
-<div class="card"><h3>Image Enhancer</h3><p>Improve quality</p><a class="open" href="image-enhancer.html">Open</a></div>
+<!-- UTILITIES -->
+<h2 class="section-title">⚡ Utility Tools</h2>
+<section class="tools">
 
-<div class="card"><h3>Background Remover</h3><p>Remove BG</p><a class="open" href="background-remover.html">Open</a></div>
-
-<div class="card"><h3>QR Generator</h3><p>Create QR</p><a class="open" href="qr-generator.html">Open</a></div>
-
-<div class="card"><h3>Image to Text</h3><p>OCR Tool</p><a class="open" href="image-to-text.html">Open</a></div>
+<div class="card"><h3>QR Generator</h3><p>Create QR</p><a class="btn" href="qr-generator.html">Open</a></div>
+<div class="card"><h3>Text to PDF</h3><p>Convert text</p><a class="btn" href="text-to-pdf.html">Open</a></div>
 
 </section>
 
 <!-- ABOUT -->
-<div class="about" id="about">
+<section class="about" id="about">
 <h2>About ToolHub</h2>
 <p>
-ToolHub is a free SaaS platform offering PDF tools, image tools, OCR, and utilities.
-Built for fast productivity and easy use.
+ToolHub is a free online platform offering PDF tools, image tools, OCR and utilities.
+Fast, simple and free for everyone.
 </p>
-</div>
+</section>
 
 <!-- CONTACT -->
-<div class="contact" id="contact">
+<section class="contact" id="contact">
 <h2>Contact Us</h2>
-<input placeholder="Name"><br>
-<input placeholder="Email"><br>
-<textarea rows="4" placeholder="Message"></textarea><br>
-<button class="btn login">Send</button>
-</div>
 
-<!-- LOGIN MODAL -->
-<div class="modal" id="modal">
-<div class="box">
-<span class="close" onclick="closeLogin()">X</span>
-<h3>Login</h3>
-<input id="email" placeholder="Email">
-<input id="pass" placeholder="Password" type="password">
-<button class="btn login" onclick="login()">Login</button>
-<button class="btn" onclick="signup()">Sign Up</button>
-</div>
-</div>
+<input type="text" placeholder="Your Name"><br>
+<input type="email" placeholder="Your Email"><br>
+<textarea rows="4" placeholder="Message"></textarea><br>
+<button>Send Message</button>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+© 2026 ToolHub | All Rights Reserved
+</footer>
 
 <script>
 
-// Firebase config (demo - replace with your project)
-const firebaseConfig = {
-apiKey: "YOUR_API_KEY",
-authDomain: "YOUR_PROJECT.firebaseapp.com",
-projectId: "YOUR_PROJECT",
-appId: "YOUR_APP_ID"
-};
-
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-
-function openLogin(){
-document.getElementById("modal").style.display="flex";
-}
-
-function closeLogin(){
-document.getElementById("modal").style.display="none";
-}
-
-function signup(){
-let email=document.getElementById("email").value;
-let pass=document.getElementById("pass").value;
-
-auth.createUserWithEmailAndPassword(email,pass)
-.then(()=>alert("Account Created"))
-.catch(e=>alert(e.message));
-}
-
-function login(){
-let email=document.getElementById("email").value;
-let pass=document.getElementById("pass").value;
-
-auth.signInWithEmailAndPassword(email,pass)
-.then(()=>{alert("Logged in");closeLogin();})
-.catch(e=>alert(e.message));
-}
-
-function logout(){
-auth.signOut();
-alert("Logged out");
-}
-
-auth.onAuthStateChanged(user=>{
-if(user){
-document.querySelector(".login").style.display="none";
-document.querySelector(".logout").style.display="inline-block";
-}else{
-document.querySelector(".login").style.display="inline-block";
-document.querySelector(".logout").style.display="none";
-}
-});
-
-// search
-function searchTools(value){
-value=value.toLowerCase();
+function filterTools(){
+let input=document.getElementById("search").value.toLowerCase();
 let cards=document.getElementsByClassName("card");
 
-for(let c of cards){
-c.style.display=c.innerText.toLowerCase().includes(value)?"block":"none";
+for(let i=0;i<cards.length;i++){
+let text=cards[i].innerText.toLowerCase();
+cards[i].classList.toggle("hidden",!text.includes(input));
 }
 }
 
