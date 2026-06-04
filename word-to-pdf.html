@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Word to PDF - ToolHub</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://unpkg.com/mammoth/mammoth.browser.min.js"></script>
+
+<style>
+body{
+font-family:Arial;
+background:#f4f7fc;
+padding:20px;
+text-align:center;
+}
+
+.container{
+max-width:800px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+
+input,button{
+margin-top:15px;
+padding:12px;
+}
+
+button{
+background:#2563eb;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+#output{
+margin-top:20px;
+text-align:left;
+white-space:pre-wrap;
+border:1px solid #ddd;
+padding:10px;
+border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📄 Word to PDF Converter</h1>
+
+<p>Upload .docx file and convert to PDF</p>
+
+<input type="file" id="fileInput" accept=".docx">
+
+<br>
+
+<button onclick="convert()">Convert to PDF</button>
+
+<div id="output"></div>
+
+</div>
+
+<script>
+
+async function convert(){
+
+const file=document.getElementById("fileInput").files[0];
+
+if(!file){
+alert("Select a DOCX file");
+return;
+}
+
+document.getElementById("output").innerText="Processing...";
+
+const arrayBuffer=await file.arrayBuffer();
+
+mammoth.extractRawText({arrayBuffer})
+.then(function(result){
+
+const text=result.value;
+
+const { jsPDF } = window.jspdf;
+
+const pdf=new jsPDF();
+
+const lines=pdf.splitTextToSize(text,180);
+
+pdf.text(lines,15,20);
+
+pdf.save("ToolHub-Word.pdf");
+
+document.getElementById("output").innerText="✅ PDF generated successfully";
+
+})
+.catch(err=>{
+console.log(err);
+document.getElementById("output").innerText="❌ Error converting file";
+});
+
+}
+
+</script>
+
+</body>
+</html>
