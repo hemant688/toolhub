@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PDF Split - ToolHub</title>
+
+<script src="https://unpkg.com/pdf-lib"></script>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f4f7fc;
+padding:20px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+h1{
+text-align:center;
+margin-bottom:10px;
+color:#111827;
+}
+
+.subtitle{
+text-align:center;
+color:#666;
+margin-bottom:30px;
+}
+
+.upload-box{
+border:3px dashed #2563eb;
+padding:40px;
+text-align:center;
+border-radius:15px;
+background:#f8fbff;
+margin-bottom:25px;
+}
+
+.split-btn{
+width:100%;
+padding:15px;
+background:#2563eb;
+border:none;
+color:white;
+font-size:18px;
+font-weight:bold;
+border-radius:10px;
+cursor:pointer;
+margin-top:20px;
+}
+
+.split-btn:hover{
+background:#1d4ed8;
+}
+
+.status{
+margin-top:20px;
+text-align:center;
+font-weight:bold;
+}
+
+.downloads{
+margin-top:25px;
+}
+
+.download-link{
+display:block;
+background:#22c55e;
+color:white;
+padding:12px;
+margin-bottom:10px;
+text-decoration:none;
+border-radius:10px;
+text-align:center;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📄 PDF Split Tool</h1>
+
+<p class="subtitle">
+Split a PDF into separate pages instantly.
+</p>
+
+<div class="upload-box">
+
+<input
+type="file"
+id="pdfFile"
+accept=".pdf"
+>
+
+</div>
+
+<button
+class="split-btn"
+onclick="splitPDF()"
+>
+Split PDF
+</button>
+
+<div
+id="status"
+class="status"
+></div>
+
+<div
+id="downloads"
+class="downloads"
+></div>
+
+</div>
+
+<script>
+
+async function splitPDF(){
+
+const file =
+document.getElementById("pdfFile").files[0];
+
+if(!file){
+
+alert("Please select a PDF file.");
+
+return;
+
+}
+  const status =
+document.getElementById("status");
+
+const downloads =
+document.getElementById("downloads");
+
+downloads.innerHTML = "";
+
+status.innerHTML =
+"⏳ Splitting PDF...";
+
+try{
+
+const bytes =
+await file.arrayBuffer();
+
+const pdfDoc =
+await PDFLib.PDFDocument.load(bytes);
+
+const totalPages =
+pdfDoc.getPageCount();
+
+for(let i=0;i<totalPages;i++){
+
+const newPdf =
+await PDFLib.PDFDocument.create();
+
+const [page] =
+await newPdf.copyPages(
+pdfDoc,
+[i]
+);
+
+newPdf.addPage(page);
+
+const pdfBytes =
+await newPdf.save();
+
+const blob =
+new Blob(
+[pdfBytes],
+{
+type:"application/pdf"
+}
+);
+
+const url =
+URL.createObjectURL(blob);
+
+downloads.innerHTML +=
+
+`
+<a
+class="download-link"
+href="${url}"
+download="page-${i+1}.pdf"
+>
+⬇ Download Page ${i+1}
+</a>
+`;
+
+}
+
+status.innerHTML =
+`✅ PDF split successfully into ${totalPages} pages`;
+
+}
+catch(error){
+
+console.error(error);
+
+status.innerHTML =
+"❌ Error splitting PDF.";
+
+}
+}
+  </script>
+
+</body>
+</html>
