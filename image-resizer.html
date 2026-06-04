@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Resizer - ToolHub</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f4f7fc;
+padding:20px;
+}
+
+.container{
+max-width:700px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 5px 20px rgba(0,0,0,0.1);
+text-align:center;
+}
+
+h1{
+margin-bottom:15px;
+color:#111827;
+}
+
+p{
+margin-bottom:20px;
+color:#666;
+}
+
+input{
+padding:10px;
+margin:10px;
+width:120px;
+}
+
+button{
+background:#2563eb;
+color:white;
+border:none;
+padding:12px 24px;
+border-radius:8px;
+cursor:pointer;
+font-size:16px;
+}
+
+button:hover{
+background:#1d4ed8;
+}
+
+img{
+max-width:100%;
+margin-top:20px;
+border-radius:10px;
+}
+
+.download-btn{
+display:none;
+margin-top:20px;
+padding:12px 20px;
+background:#22c55e;
+color:white;
+text-decoration:none;
+border-radius:8px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>🖼️ Image Resizer</h1>
+<p>Resize JPG, PNG and WEBP images online for free.</p>
+
+<input type="file" id="imageInput" accept="image/*">
+
+<div>
+<input type="number" id="width" placeholder="Width">
+<input type="number" id="height" placeholder="Height">
+</div>
+
+<button onclick="resizeImage()">Resize Image</button>
+
+<div id="preview"></div>
+
+<a id="downloadBtn" class="download-btn" download="resized-image.png">
+Download Image
+</a>
+
+</div>
+
+<script>
+
+function resizeImage(){
+
+const file = document.getElementById("imageInput").files[0];
+
+if(!file){
+alert("Please select an image");
+return;
+}
+
+const width = parseInt(document.getElementById("width").value);
+const height = parseInt(document.getElementById("height").value);
+
+if(!width || !height){
+alert("Enter width and height");
+return;
+}
+
+const reader = new FileReader();
+
+reader.onload = function(e){
+
+const img = new Image();
+
+img.onload = function(){
+
+const canvas = document.createElement("canvas");
+canvas.width = width;
+canvas.height = height;
+
+const ctx = canvas.getContext("2d");
+
+ctx.drawImage(img,0,0,width,height);
+
+const resizedImage = canvas.toDataURL("image/png");
+
+document.getElementById("preview").innerHTML =
+`<img src="${resizedImage}" alt="Resized Image">`;
+
+const downloadBtn = document.getElementById("downloadBtn");
+downloadBtn.href = resizedImage;
+downloadBtn.style.display = "inline-block";
+
+};
+
+img.src = e.target.result;
+};
+
+reader.readAsDataURL(file);
+}
+
+</script>
+
+</body>
+</html>
