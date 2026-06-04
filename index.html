@@ -1,9 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ToolHub - Free Online Tools</title>
+
+<title>ToolHub - Free Online Tools | PDF Tools, Image Tools, QR Generator</title>
+
+<!-- 🔥 SEO META TAGS -->
+<meta name="description" content="ToolHub - Free online tools for PDF conversion, image editing, background remover, image enhancer, QR generator and more. Fast, free and easy tools online.">
+<meta name="keywords" content="pdf tools, image tools, free tools online, jpg to pdf, pdf to word, word to pdf, background remover, image enhancer, qr generator, online converter tools">
+<meta name="author" content="ToolHub">
+
+<!-- Open Graph (for WhatsApp / Facebook preview) -->
+<meta property="og:title" content="ToolHub - Free Online Tools">
+<meta property="og:description" content="Free PDF tools, image tools, QR generator, background remover and more online tools.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hemant688.github.io/toolhub/">
 
 <style>
 *{
@@ -29,9 +42,7 @@ align-items:center;
 flex-wrap:wrap;
 }
 
-nav h2{
-font-size:22px;
-}
+nav h2{font-size:22px;}
 
 .nav-links a{
 color:white;
@@ -159,6 +170,7 @@ margin-top:40px;
 
 .hidden{display:none;}
 </style>
+
 </head>
 
 <body>
@@ -247,7 +259,6 @@ Fast, simple and free for everyone.
 </footer>
 
 <script>
-
 function filterTools(){
 let input=document.getElementById("search").value.toLowerCase();
 let cards=document.getElementsByClassName("card");
@@ -257,7 +268,6 @@ let text=cards[i].innerText.toLowerCase();
 cards[i].classList.toggle("hidden",!text.includes(input));
 }
 }
-
 </script>
 
 </body>
