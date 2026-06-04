@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PDF Merge - ToolHub</title>
+
+<script src="https://unpkg.com/pdf-lib"></script>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f4f7fc;
+padding:20px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+h1{
+text-align:center;
+margin-bottom:10px;
+color:#111827;
+}
+
+.subtitle{
+text-align:center;
+color:#666;
+margin-bottom:30px;
+}
+
+.upload-box{
+border:3px dashed #2563eb;
+padding:40px;
+text-align:center;
+border-radius:15px;
+background:#f8fbff;
+margin-bottom:25px;
+}
+
+.upload-box input{
+margin-top:15px;
+}
+
+.file-list{
+margin-top:20px;
+}
+
+.file-item{
+background:#f8fafc;
+padding:12px;
+margin-bottom:10px;
+border-radius:10px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.merge-btn{
+width:100%;
+padding:15px;
+background:#2563eb;
+border:none;
+color:white;
+font-size:18px;
+font-weight:bold;
+border-radius:10px;
+cursor:pointer;
+margin-top:20px;
+}
+
+.merge-btn:hover{
+background:#1d4ed8;
+}
+
+.status{
+margin-top:20px;
+text-align:center;
+font-weight:bold;
+}
+
+.download-btn{
+display:none;
+text-align:center;
+margin-top:20px;
+}
+
+.download-btn a{
+display:inline-block;
+background:#22c55e;
+color:white;
+padding:14px 25px;
+border-radius:10px;
+text-decoration:none;
+font-weight:bold;
+}
+
+footer{
+text-align:center;
+margin-top:30px;
+color:#666;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📄 PDF Merge Tool</h1>
+
+<p class="subtitle">
+Combine multiple PDF files into a single PDF document.
+</p>
+
+<div class="upload-box">
+
+<h3>Select Multiple PDF Files</h3>
+
+<input
+type="file"
+id="pdfFiles"
+accept=".pdf"
+multiple
+>
+
+</div>
+
+<div id="fileList" class="file-list"></div>
+
+<button
+class="merge-btn"
+onclick="mergePDFs()"
+>
+Merge PDFs
+</button>
+
+<div
+id="status"
+class="status"
+></div>
+
+<div
+id="downloadContainer"
+class="download-btn"
+></div>
+
+<footer>
+ToolHub - Free Online PDF Tools
+</footer>
+
+</div>
+
+<script>
+
+let selectedFiles=[];
+
+document
+.getElementById("pdfFiles")
+.addEventListener("change",function(){
+
+selectedFiles=[...this.files];
+
+const fileList=
+document.getElementById("fileList");
+
+fileList.innerHTML="";
+
+selectedFiles.forEach((file,index)=>{
+
+fileList.innerHTML+=`
+
+<div class="file-item">
+
+<span>
+${index+1}. ${file.name}
+</span>
+
+<span>
+${(file.size/1024/1024).toFixed(2)} MB
+</span>
+
+</div>
+
+`;
+
+});
+
+});
+  async function mergePDFs(){
+
+if(selectedFiles.length<2){
+
+alert(
+"Please select at least 2 PDF files."
+);
+
+return;
+
+}
+
+const status=
+document.getElementById("status");
+
+status.innerHTML=
+"⏳ Merging PDFs... Please wait.";
+
+try{
+
+const mergedPdf=
+await PDFLib.PDFDocument.create();
+
+for(const file of selectedFiles){
+
+const fileBytes=
+await file.arrayBuffer();
+
+const pdf=
+await PDFLib.PDFDocument.load(
+fileBytes
+);
+
+const copiedPages=
+await mergedPdf.copyPages(
+pdf,
+pdf.getPageIndices()
+);
+
+copiedPages.forEach(page=>{
+
+mergedPdf.addPage(page);
+
+});
+
+}
+
+const mergedPdfBytes=
+await mergedPdf.save();
+
+const blob=
+new Blob(
+[mergedPdfBytes],
+{
+type:"application/pdf"
+}
+);
+
+const url=
+URL.createObjectURL(blob);
+
+document
+.getElementById(
+"downloadContainer"
+)
+.innerHTML=
+
+`
+<a
+href="${url}"
+download="ToolHub-Merged.pdf"
+>
+⬇ Download Merged PDF
+</a>
+`;
+
+document
+.getElementById(
+"downloadContainer"
+)
+.style.display=
+"block";
+
+status.innerHTML=
+"✅ PDF merged successfully.";
+
+}
+catch(error){
+
+console.error(error);
+
+status.innerHTML=
+"❌ Error while merging PDFs.";
+
+}
+}
+  </script>
+
+</body>
+</html>
