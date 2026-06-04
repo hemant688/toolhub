@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Background Remover - ToolHub</title>
+
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#f4f7fc;
+padding:20px;
+text-align:center;
+}
+
+.container{
+max-width:800px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+
+input,button{
+margin-top:15px;
+padding:12px;
+}
+
+button{
+background:#2563eb;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+img{
+max-width:100%;
+margin-top:20px;
+}
+
+canvas{
+display:none;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>🖼 Background Remover (Free)</h1>
+<p>Simple AI-based background removal (client-side)</p>
+
+<input type="file" id="fileInput" accept="image/*">
+<br>
+<button onclick="removeBg()">Remove Background</button>
+
+<div id="result"></div>
+
+<a id="download" style="display:none;" download="no-bg.png">Download Image</a>
+
+</div>
+
+<!-- TensorFlow + BodyPix -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.10.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-pix"></script>
+
+<script>
+
+async function removeBg(){
+
+const file=document.getElementById("fileInput").files[0];
+
+if(!file){
+alert("Select image first");
+return;
+}
+
+document.getElementById("result").innerHTML="Processing... please wait";
+
+const img=new Image();
+img.src=URL.createObjectURL(file);
+
+img.onload=async()=>{
+
+const net=await bodyPix.load();
+
+const segmentation=await net.segmentPerson(img);
+
+const canvas=document.createElement("canvas");
+canvas.width=img.width;
+canvas.height=img.height;
+
+const ctx=canvas.getContext("2d");
+
+ctx.drawImage(img,0,0);
+
+const imageData=ctx.getImageData(0,0,canvas.width,canvas.height);
+
+for(let i=0;i<segmentation.data.length;i++){
+
+if(segmentation.data[i]===0){
+imageData.data[i*4+3]=0;
+}
+
+}
+
+ctx.putImageData(imageData,0,0);
+
+const url=canvas.toDataURL("image/png");
+
+document.getElementById("result").innerHTML=
+`<img src="${url}">`;
+
+const download=document.getElementById("download");
+download.href=url;
+download.style.display="inline-block";
+download.innerText="Download Image";
+
+};
+
+}
+
+</script>
+
+</body>
+</html>
