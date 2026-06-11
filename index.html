@@ -5,14 +5,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ToolHub - Free Online Tools | PDF Tools, Image Tools, QR Generator</title>
+<title>ToolHub - Free PDF Tools, Image Tools & Online Utilities</title>
 
-<!-- 🔥 SEO META TAGS -->
-<meta name="description" content="ToolHub - Free online tools for PDF conversion, image editing, background remover, image enhancer, QR generator and more. Fast, free and easy tools online.">
+<meta name="description" content="Free online PDF tools, image tools and utilities. Convert JPG to PDF, PDF to JPG, merge PDF files, resize images, remove backgrounds, generate QR codes and more.">
+
 <meta name="keywords" content="pdf tools, image tools, free tools online, jpg to pdf, pdf to word, word to pdf, background remover, image enhancer, qr generator, online converter tools">
+
 <meta name="author" content="ToolHub">
 
-<!-- Open Graph (for WhatsApp / Facebook preview) -->
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://hemant688.github.io/toolhub/">
+
 <meta property="og:title" content="ToolHub - Free Online Tools">
 <meta property="og:description" content="Free PDF tools, image tools, QR generator, background remover and more online tools.">
 <meta property="og:type" content="website">
@@ -31,7 +35,6 @@ background:#f5f7fb;
 color:#111827;
 }
 
-/* NAV */
 nav{
 background:#0f172a;
 color:white;
@@ -42,7 +45,9 @@ align-items:center;
 flex-wrap:wrap;
 }
 
-nav h2{font-size:22px;}
+nav h2{
+font-size:22px;
+}
 
 .nav-links a{
 color:white;
@@ -51,17 +56,23 @@ margin:0 10px;
 font-size:14px;
 }
 
-/* HERO */
 .hero{
 text-align:center;
 padding:40px 20px;
 background:white;
 }
 
-.hero h1{font-size:34px;}
-.hero p{color:#666;margin-top:10px;max-width:700px;margin:auto;}
+.hero h1{
+font-size:34px;
+}
 
-/* SEARCH */
+.hero p{
+color:#666;
+margin-top:10px;
+max-width:700px;
+margin:auto;
+}
+
 .search-box{
 text-align:center;
 margin:20px;
@@ -75,14 +86,12 @@ border:1px solid #ddd;
 border-radius:10px;
 }
 
-/* SECTION */
 .section-title{
 text-align:center;
 margin:30px 0 10px;
 font-size:20px;
 }
 
-/* GRID */
 .tools{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -91,9 +100,7 @@ padding:20px;
 max-width:1200px;
 margin:auto;
 }
-
-/* CARD */
-.card{
+  .card{
 background:white;
 padding:18px;
 border-radius:15px;
@@ -106,8 +113,15 @@ position:relative;
 transform:translateY(-6px);
 }
 
-.card h3{margin-bottom:8px;}
-.card p{font-size:13px;color:#666;margin-bottom:10px;}
+.card h3{
+margin-bottom:8px;
+}
+
+.card p{
+font-size:13px;
+color:#666;
+margin-bottom:10px;
+}
 
 .btn{
 display:inline-block;
@@ -119,7 +133,6 @@ border-radius:8px;
 font-size:13px;
 }
 
-/* ABOUT */
 .about{
 background:white;
 padding:40px 20px;
@@ -128,13 +141,12 @@ margin-top:30px;
 }
 
 .about p{
-max-width:700px;
+max-width:900px;
 margin:auto;
 color:#555;
-line-height:1.6;
+line-height:1.8;
 }
 
-/* CONTACT */
 .contact{
 padding:40px 20px;
 text-align:center;
@@ -159,7 +171,6 @@ border-radius:8px;
 cursor:pointer;
 }
 
-/* FOOTER */
 footer{
 text-align:center;
 padding:20px;
@@ -168,14 +179,15 @@ color:white;
 margin-top:40px;
 }
 
-.hidden{display:none;}
+.hidden{
+display:none;
+}
 </style>
 
 </head>
 
 <body>
 
-<!-- NAV -->
 <nav>
 <h2>🚀 ToolHub</h2>
 
@@ -186,88 +198,180 @@ margin-top:40px;
 </div>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
-<h1>All Free Online Tools in One Place</h1>
-<p>PDF tools, image tools, OCR, background remover, QR generator and more — fast & free.</p>
+<h1>Free PDF Tools, Image Tools and Online Utilities</h1>
+
+<p>
+Convert PDF files, edit images, remove backgrounds, enhance photos,
+generate QR codes and use many free online tools instantly.
+</p>
 </div>
 
-<!-- SEARCH -->
 <div class="search-box">
 <input type="text" id="search" placeholder="Search tools..." onkeyup="filterTools()">
 </div>
 
-<!-- PDF TOOLS -->
 <h2 class="section-title" id="tools">📄 PDF Tools</h2>
+
 <section class="tools">
 
-<div class="card"><h3>JPG to PDF</h3><p>Convert images</p><a class="btn" href="jpg-to-pdf.html">Open</a></div>
-<div class="card"><h3>PDF to JPG</h3><p>Convert pages</p><a class="btn" href="pdf-to-jpg.html">Open</a></div>
-<div class="card"><h3>PDF Merge</h3><p>Combine PDFs</p><a class="btn" href="pdf-merge.html">Open</a></div>
-<div class="card"><h3>PDF Split</h3><p>Split PDF</p><a class="btn" href="pdf-split.html">Open</a></div>
-<div class="card"><h3>PDF Rotate</h3><p>Rotate pages</p><a class="btn" href="pdf-rotate.html">Open</a></div>
-<div class="card"><h3>Word to PDF</h3><p>DOCX convert</p><a class="btn" href="word-to-pdf.html">Open</a></div>
-<div class="card"><h3>PDF to Word</h3><p>Extract text</p><a class="btn" href="pdf-to-word.html">Open</a></div>
+<div class="card">
+<h3>JPG to PDF</h3>
+<p>Convert images to PDF files</p>
+<a class="btn" href="jpg-to-pdf.html">Open</a>
+</div>
+
+<div class="card">
+<h3>PDF to JPG</h3>
+<p>Convert PDF pages to images</p>
+<a class="btn" href="pdf-to-jpg.html">Open</a>
+</div>
+
+<div class="card">
+<h3>PDF Merge</h3>
+<p>Combine multiple PDFs</p>
+<a class="btn" href="pdf-merge.html">Open</a>
+</div>
+
+<div class="card">
+<h3>PDF Split</h3>
+<p>Split PDF documents</p>
+<a class="btn" href="pdf-split.html">Open</a>
+</div>
+
+<div class="card">
+<h3>PDF Rotate</h3>
+<p>Rotate PDF pages</p>
+<a class="btn" href="pdf-rotate.html">Open</a>
+</div>
+
+<div class="card">
+<h3>Word to PDF</h3>
+<p>Convert DOCX files</p>
+<a class="btn" href="word-to-pdf.html">Open</a>
+</div>
+
+<div class="card">
+<h3>PDF to Word</h3>
+<p>Extract text from PDF</p>
+<a class="btn" href="pdf-to-word.html">Open</a>
+</div>
 
 </section>
-
-<!-- IMAGE TOOLS -->
 <h2 class="section-title">🖼 Image Tools</h2>
+
 <section class="tools">
 
-<div class="card"><h3>Image Resizer</h3><p>Resize image</p><a class="btn" href="image-resizer.html">Open</a></div>
-<div class="card"><h3>Image Cropper</h3><p>Crop image</p><a class="btn" href="image-cropper.html">Open</a></div>
-<div class="card"><h3>Image Enhancer</h3><p>Improve quality</p><a class="btn" href="image-enhancer.html">Open</a></div>
-<div class="card"><h3>Background Remover</h3><p>Remove BG</p><a class="btn" href="background-remover.html">Open</a></div>
-<div class="card"><h3>JPG to PNG</h3><p>Convert format</p><a class="btn" href="jpg-to-png.html">Open</a></div>
-<div class="card"><h3>Image to Text</h3><p>OCR tool</p><a class="btn" href="image-to-text.html">Open</a></div>
+<div class="card">
+<h3>Image Resizer</h3>
+<p>Resize image dimensions</p>
+<a class="btn" href="image-resizer.html">Open</a>
+</div>
+
+<div class="card">
+<h3>Image Cropper</h3>
+<p>Crop images online</p>
+<a class="btn" href="image-cropper.html">Open</a>
+</div>
+
+<div class="card">
+<h3>Image Enhancer</h3>
+<p>Improve image quality</p>
+<a class="btn" href="image-enhancer.html">Open</a>
+</div>
+
+<div class="card">
+<h3>Background Remover</h3>
+<p>Remove image backgrounds</p>
+<a class="btn" href="background-remover.html">Open</a>
+</div>
+
+<div class="card">
+<h3>JPG to PNG</h3>
+<p>Convert JPG into PNG</p>
+<a class="btn" href="jpg-to-png.html">Open</a>
+</div>
+
+<div class="card">
+<h3>Image to Text</h3>
+<p>OCR text extraction tool</p>
+<a class="btn" href="image-to-text.html">Open</a>
+</div>
 
 </section>
 
-<!-- UTILITIES -->
 <h2 class="section-title">⚡ Utility Tools</h2>
+
 <section class="tools">
 
-<div class="card"><h3>QR Generator</h3><p>Create QR</p><a class="btn" href="qr-generator.html">Open</a></div>
-<div class="card"><h3>Text to PDF</h3><p>Convert text</p><a class="btn" href="text-to-pdf.html">Open</a></div>
+<div class="card">
+<h3>QR Generator</h3>
+<p>Create QR codes instantly</p>
+<a class="btn" href="qr-generator.html">Open</a>
+</div>
+
+<div class="card">
+<h3>Text to PDF</h3>
+<p>Convert text into PDF</p>
+<a class="btn" href="text-to-pdf.html">Open</a>
+</div>
 
 </section>
 
-<!-- ABOUT -->
 <section class="about" id="about">
+
 <h2>About ToolHub</h2>
+
 <p>
-ToolHub is a free online platform offering PDF tools, image tools, OCR and utilities.
-Fast, simple and free for everyone.
+ToolHub is a free online platform that offers a wide collection of PDF tools, image editing tools and utility tools. Our goal is to provide simple, fast and secure online tools that work directly in your browser.
+
+With ToolHub, you can convert JPG to PDF, PDF to JPG, merge PDF files, split PDF documents, rotate PDFs, convert Word to PDF, resize images, crop images, enhance image quality, remove backgrounds, extract text from images and generate QR codes.
+
+All tools are completely free to use and require no software installation. Whether you are a student, professional, designer or everyday user, ToolHub helps you complete common tasks quickly and efficiently.
 </p>
+
 </section>
 
-<!-- CONTACT -->
 <section class="contact" id="contact">
+
 <h2>Contact Us</h2>
 
 <input type="text" placeholder="Your Name"><br>
 <input type="email" placeholder="Your Email"><br>
 <textarea rows="4" placeholder="Message"></textarea><br>
+
 <button>Send Message</button>
 
 </section>
 
-<!-- FOOTER -->
 <footer>
 © 2026 ToolHub | All Rights Reserved
 </footer>
 
 <script>
+
 function filterTools(){
-let input=document.getElementById("search").value.toLowerCase();
-let cards=document.getElementsByClassName("card");
+
+let input =
+document.getElementById("search").value.toLowerCase();
+
+let cards =
+document.getElementsByClassName("card");
 
 for(let i=0;i<cards.length;i++){
-let text=cards[i].innerText.toLowerCase();
-cards[i].classList.toggle("hidden",!text.includes(input));
+
+let text =
+cards[i].innerText.toLowerCase();
+
+cards[i].classList.toggle(
+"hidden",
+!text.includes(input)
+);
+
 }
+
 }
+
 </script>
 
 </body>
