@@ -1,377 +1,408 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToolHub - Free PDF Tools, Image Tools & Online Utilities</title>
+    <meta name="description" content="Free online PDF tools, image tools and utilities. Convert JPG to PDF, PDF to JPG, merge PDF files, resize images, remove backgrounds, generate QR codes and more.">
+    <meta name="keywords" content="pdf tools, image tools, free tools online, jpg to pdf, pdf to word, word to pdf, background remover, image enhancer, qr generator, online converter tools">
+    <meta name="author" content="ToolHub">
+    <meta name="robots" content="index, follow">
 
-<title>ToolHub - Free PDF Tools, Image Tools & Online Utilities</title>
+    <!-- Netlify Canonical URL Fixed for Google Search Console -->
+    <link rel="canonical" href="https://elegant-tanuki-258163.netlify.app/">
 
-<meta name="description" content="Free online PDF tools, image tools and utilities. Convert JPG to PDF, PDF to JPG, merge PDF files, resize images, remove backgrounds, generate QR codes and more.">
+    <!-- Open Graph / Facebook / WhatsApp Presentation -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://elegant-tanuki-258163.netlify.app/">
+    <meta property="og:title" content="ToolHub - Free PDF & Image Tools Online">
+    <meta property="og:description" content="Convert JPG to PDF, merge files, resize images, remove backgrounds, and generate QR codes instantly without installation.">
+    <meta property="og:image" content="https://elegant-tanuki-258163.netlify.app/assets/og-image.png">
 
-<meta name="keywords" content="pdf tools, image tools, free tools online, jpg to pdf, pdf to word, word to pdf, background remover, image enhancer, qr generator, online converter tools">
+    <!-- Twitter Optimization -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://elegant-tanuki-258163.netlify.app/">
+    <meta property="twitter:title" content="ToolHub - Free PDF & Image Tools Online">
+    <meta property="twitter:description" content="Convert JPG to PDF, merge files, resize images, remove backgrounds, and generate QR codes instantly without installation.">
 
-<meta name="author" content="ToolHub">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
 
-<meta name="robots" content="index, follow">
+        body {
+            background: #f8fafc;
+            color: #0f172a;
+            line-height: 1.5;
+        }
 
-<link rel="canonical" href="https://hemant688.github.io/toolhub/">
+        nav {
+            background: #0f172a;
+            color: white;
+            padding: 18px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
 
-<meta property="og:title" content="ToolHub - Free Online Tools">
-<meta property="og:description" content="Free PDF tools, image tools, QR generator, background remover and more online tools.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://hemant688.github.io/toolhub/">
+        nav h2 {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
+        .nav-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin: 0 12px;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
 
-body{
-background:#f5f7fb;
-color:#111827;
-}
+        .nav-links a:hover {
+            color: #ffffff;
+        }
 
-nav{
-background:#0f172a;
-color:white;
-padding:15px 20px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-flex-wrap:wrap;
-}
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+        }
 
-nav h2{
-font-size:22px;
-}
+        .hero h1 {
+            font-size: 38px;
+            color: #0f172a;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
 
-.nav-links a{
-color:white;
-text-decoration:none;
-margin:0 10px;
-font-size:14px;
-}
+        .hero p {
+            color: #475569;
+            margin-top: 15px;
+            max-width: 750px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 17px;
+        }
 
-.hero{
-text-align:center;
-padding:40px 20px;
-background:white;
-}
+        .search-box {
+            text-align: center;
+            margin: 35px 20px;
+        }
 
-.hero h1{
-font-size:34px;
-}
+        .search-box input {
+            width: 100%;
+            max-width: 550px;
+            padding: 14px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
 
-.hero p{
-color:#666;
-margin-top:10px;
-max-width:700px;
-margin:auto;
-}
+        .search-box input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
 
-.search-box{
-text-align:center;
-margin:20px;
-}
+        .section-title {
+            text-align: center;
+            margin: 45px 0 20px;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1e293b;
+        }
 
-.search-box input{
-width:80%;
-max-width:500px;
-padding:12px;
-border:1px solid #ddd;
-border-radius:10px;
-}
+        .tools {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
 
-.section-title{
-text-align:center;
-margin:30px 0 10px;
-font-size:20px;
-}
+        .card {
+            background: white;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #f1f5f9;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
 
-.tools{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
-padding:20px;
-max-width:1200px;
-margin:auto;
-}
-  .card{
-background:white;
-padding:18px;
-border-radius:15px;
-box-shadow:0 5px 15px rgba(0,0,0,0.08);
-transition:0.3s;
-position:relative;
-}
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: #e2e8f0;
+        }
 
-.card:hover{
-transform:translateY(-6px);
-}
+        .card h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #1e293b;
+        }
 
-.card h3{
-margin-bottom:8px;
-}
+        .card p {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
 
-.card p{
-font-size:13px;
-color:#666;
-margin-bottom:10px;
-}
+        .btn {
+            display: block;
+            text-align: center;
+            padding: 10px 16px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.2s ease;
+        }
 
-.btn{
-display:inline-block;
-padding:8px 14px;
-background:#2563eb;
-color:white;
-text-decoration:none;
-border-radius:8px;
-font-size:13px;
-}
+        .btn:hover {
+            background: #1d4ed8;
+        }
 
-.about{
-background:white;
-padding:40px 20px;
-text-align:center;
-margin-top:30px;
-}
+        .about {
+            background: white;
+            padding: 60px 20px;
+            text-align: center;
+            margin-top: 60px;
+            border-top: 1px solid #e2e8f0;
+        }
 
-.about p{
-max-width:900px;
-margin:auto;
-color:#555;
-line-height:1.8;
-}
+        .about h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #0f172a;
+        }
 
-.contact{
-padding:40px 20px;
-text-align:center;
-}
+        .about p {
+            max-width: 850px;
+            margin: auto;
+            color: #475569;
+            line-height: 1.8;
+            font-size: 16px;
+        }
 
-.contact input,
-.contact textarea{
-width:90%;
-max-width:500px;
-padding:12px;
-margin:8px;
-border:1px solid #ddd;
-border-radius:8px;
-}
+        .contact {
+            padding: 60px 20px;
+            text-align: center;
+            background: #f8fafc;
+        }
 
-.contact button{
-background:#2563eb;
-color:white;
-padding:12px 20px;
-border:none;
-border-radius:8px;
-cursor:pointer;
-}
+        .contact h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #0f172a;
+        }
 
-footer{
-text-align:center;
-padding:20px;
-background:#0f172a;
-color:white;
-margin-top:40px;
-}
+        .contact input,
+        .contact textarea {
+            width: 100%;
+            max-width: 550px;
+            padding: 14px;
+            margin: 10px auto;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            display: block;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
 
-.hidden{
-display:none;
-}
-</style>
+        .contact input:focus,
+        .contact textarea:focus {
+            border-color: #2563eb;
+        }
 
+        .contact button {
+            background: #2563eb;
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
+
+        .contact button:hover {
+            background: #1d4ed8;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px 20px;
+            background: #0f172a;
+            color: #94a3b8;
+            font-size: 14px;
+            border-top: 1px solid #1e293b;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
 </head>
 
 <body>
 
 <nav>
-<h2>🚀 ToolHub</h2>
-
-<div class="nav-links">
-<a href="#tools">Tools</a>
-<a href="#about">About</a>
-<a href="#contact">Contact</a>
-</div>
+    <h2>🚀 ToolHub</h2>
+    <div class="nav-links">
+        <a href="#tools">Tools</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </div>
 </nav>
 
 <div class="hero">
-<h1>Free PDF Tools, Image Tools and Online Utilities</h1>
-
-<p>
-Convert PDF files, edit images, remove backgrounds, enhance photos,
-generate QR codes and use many free online tools instantly.
-</p>
+    <h1>Free PDF Tools, Image Tools and Online Utilities</h1>
+    <p>Convert PDF files, edit images, remove backgrounds, enhance photos, generate QR codes and use many free online tools instantly.</p>
 </div>
 
 <div class="search-box">
-<input type="text" id="search" placeholder="Search tools..." onkeyup="filterTools()">
+    <input type="text" id="search" placeholder="Search tools..." onkeyup="filterTools()">
 </div>
 
 <h2 class="section-title" id="tools">📄 PDF Tools</h2>
-
 <section class="tools">
-
-<div class="card">
-<h3>JPG to PDF</h3>
-<p>Convert images to PDF files</p>
-<a class="btn" href="jpg-to-pdf.html">Open</a>
-</div>
-
-<div class="card">
-<h3>PDF to JPG</h3>
-<p>Convert PDF pages to images</p>
-<a class="btn" href="pdf-to-jpg.html">Open</a>
-</div>
-
-<div class="card">
-<h3>PDF Merge</h3>
-<p>Combine multiple PDFs</p>
-<a class="btn" href="pdf-merge.html">Open</a>
-</div>
-
-<div class="card">
-<h3>PDF Split</h3>
-<p>Split PDF documents</p>
-<a class="btn" href="pdf-split.html">Open</a>
-</div>
-
-<div class="card">
-<h3>PDF Rotate</h3>
-<p>Rotate PDF pages</p>
-<a class="btn" href="pdf-rotate.html">Open</a>
-</div>
-
-<div class="card">
-<h3>Word to PDF</h3>
-<p>Convert DOCX files</p>
-<a class="btn" href="word-to-pdf.html">Open</a>
-</div>
-
-<div class="card">
-<h3>PDF to Word</h3>
-<p>Extract text from PDF</p>
-<a class="btn" href="pdf-to-word.html">Open</a>
-</div>
-
+    <div class="card">
+        <h3>JPG to PDF</h3>
+        <p>Convert images to PDF files</p>
+        <a class="btn" href="jpg-to-pdf.html">Open</a>
+    </div>
+    <div class="card">
+        <h3>PDF to JPG</h3>
+        <p>Convert PDF pages to images</p>
+        <a class="btn" href="pdf-to-jpg.html">Open</a>
+    </div>
+    <div class="card">
+        <h3>PDF Merge</h3>
+        <p>Combine multiple PDFs</p>
+        <a class="btn" href="pdf-merge.html">Open</a>
+    </div>
+    <div class="card">
+        <h3>PDF Split</h3>
+        <p>Split PDF documents</p>
+        <a class="btn" href="pdf-split.html">Open</a>
+    </div>
+    <div class="card">
+        <h3>PDF Rotate</h3>
+        <p>Rotate PDF pages</p>
+        <a class="btn" href="pdf-rotate.html">Open</a>
+    </div>
+    <div class="card">
+        <h3>Word to PDF</h3>
+        <p>Convert DOCX files</p>
+        <a class="btn" href="word-to-pdf.html">Open</a>
+    </div>
+    <div class="card">
+        <h3>PDF to Word</h3>
+        <p>Extract text from PDF</p>
+        <a class="btn" href="pdf-to-word.html">Open</a>
+    </div>
 </section>
+
 <h2 class="section-title">🖼 Image Tools</h2>
-
 <section class="tools">
-
-<div class="card">
-<h3>Image Resizer</h3>
-<p>Resize image dimensions</p>
-<a class="btn" href="image-resizer.html">Open</a>
-</div>
-
-<div class="card">
-<h3>Image Cropper</h3>
-<p>Crop images online</p>
-<a class="btn" href="image-cropper.html">Open</a>
-</div>
-
-<div class="card">
-<h3>Image Enhancer</h3>
-<p>Improve image quality</p>
-<a class="btn" href="image-enhancer.html">Open</a>
-</div>
-
-<div class="card">
-<h3>Background Remover</h3>
-<p>Remove image backgrounds</p>
-<a class="btn" href="background-remover.html">Open</a>
-</div>
-
-<div class="card">
-<h3>JPG to PNG</h3>
-<p>Convert JPG into PNG</p>
-<a class="btn" href="jpg-to-png.html">Open</a>
-</div>
-
-<div class="card">
-<h3>Image to Text</h3>
-<p>OCR text extraction tool</p>
-<a class="btn" href="image-to-text.html">Open</a>
-</div>
-
+    <div class="card">
+        <h3>Image Resizer</h3>
+        <p>Resize image dimensions</p>
+        <a class="btn" href="image-resizer.html">Open</a>
+    </div>
+    <div class="card">
+        <h3>Image Cropper</h3>
+        <p>Crop images online</p>
+        <a class="btn" href="image-cropper.html">Open</a>
+    </div>
+    <div class="card">
+        <h3>Image Enhancer</h3>
+        <p>Improve image quality</p>
+        <a class="btn" href="image-enhancer.html">Open</a>
+    </div>
+    <div class="card">
+        <h3>Background Remover</h3>
+        <p>Remove image backgrounds</p>
+        <a class="btn" href="background-remover.html">Open</a>
+    </div>
+    <div class="card">
+        <h3>JPG to PNG</h3>
+        <p>Convert JPG into PNG</p>
+        <a class="btn" href="jpg-to-png.html">Open</a>
+    </div>
+    <div class="card">
+        <h3>Image to Text</h3>
+        <p>OCR text extraction tool</p>
+        <a class="btn" href="image-to-text.html">Open</a>
+    </div>
 </section>
 
 <h2 class="section-title">⚡ Utility Tools</h2>
-
 <section class="tools">
-
-<div class="card">
-<h3>QR Generator</h3>
-<p>Create QR codes instantly</p>
-<a class="btn" href="qr-generator.html">Open</a>
-</div>
-
-<div class="card">
-<h3>Text to PDF</h3>
-<p>Convert text into PDF</p>
-<a class="btn" href="text-to-pdf.html">Open</a>
-</div>
-
+    <div class="card">
+        <h3>QR Generator</h3>
+        <p>Create QR codes instantly</p>
+        <a class="btn" href="qr-generator.html">Open</a>
+    </div>
+    <div class="card">
+        <h3>Text to PDF</h3>
+        <p>Convert text into PDF</p>
+        <a class="btn" href="text-to-pdf.html">Open</a>
+    </div>
 </section>
 
 <section class="about" id="about">
-
-<h2>About ToolHub</h2>
-
-<p>
-ToolHub is a free online platform that offers a wide collection of PDF tools, image editing tools and utility tools. Our goal is to provide simple, fast and secure online tools that work directly in your browser.
-
-With ToolHub, you can convert JPG to PDF, PDF to JPG, merge PDF files, split PDF documents, rotate PDFs, convert Word to PDF, resize images, crop images, enhance image quality, remove backgrounds, extract text from images and generate QR codes.
-
-All tools are completely free to use and require no software installation. Whether you are a student, professional, designer or everyday user, ToolHub helps you complete common tasks quickly and efficiently.
-</p>
-
+    <h2>About ToolHub</h2>
+    <p>
+        ToolHub is a free online platform that offers a wide collection of PDF tools, image editing tools and utility tools. Our goal is to provide simple, fast and secure online tools that work directly in your browser.
+        With ToolHub, you can convert JPG to PDF, PDF to JPG, merge PDF files, split PDF documents, rotate PDFs, convert Word to PDF, resize images, crop images, enhance image quality, remove backgrounds, extract text from images and generate QR codes.
+        All tools are completely free to use and require no software installation. Whether you are a student, professional, designer or everyday user, ToolHub helps you complete common tasks quickly and efficiently.
+    </p>
 </section>
 
 <section class="contact" id="contact">
-
-<h2>Contact Us</h2>
-
-<input type="text" placeholder="Your Name"><br>
-<input type="email" placeholder="Your Email"><br>
-<textarea rows="4" placeholder="Message"></textarea><br>
-
-<button>Send Message</button>
-
+    <h2>Contact Us</h2>
+    <input type="text" placeholder="Your Name">
+    <input type="email" placeholder="Your Email">
+    <textarea rows="4" placeholder="Message"></textarea>
+    <button type="button">Send Message</button>
 </section>
 
 <footer>
-© 2026 ToolHub | All Rights Reserved
+    © 2026 ToolHub | All Rights Reserved
 </footer>
 
 <script>
-
 function filterTools(){
+    let input = document.getElementById("search").value.toLowerCase();
+    let cards = document.getElementsByClassName("card");
 
-let input =
-document.getElementById("search").value.toLowerCase();
-
-let cards =
-document.getElementsByClassName("card");
-
-for(let i=0;i<cards.length;i++){
-
-let text =
-cards[i].innerText.toLowerCase();
-
-cards[i].classList.toggle(
-"hidden",
-!text.includes(input)
-);
-
+    for(let i=0; i<cards.length; i++){
+        let text = cards[i].innerText.toLowerCase();
+        cards[i].classList.toggle("hidden", !text.includes(input));
+    }
 }
-
-}
-
 </script>
 
 </body>
