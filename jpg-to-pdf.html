@@ -1,199 +1,283 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JPG to PDF Converter - ToolHub</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JPG to PDF Converter - ToolHub</title>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <!-- jsPDF Library Engine -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-<style>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      padding: 20px;
+      text-align: center;
+      margin: 0;
+    }
 
-body{
-font-family:Arial,sans-serif;
-background:#f5f7fb;
-padding:20px;
-text-align:center;
-margin:0;
-}
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
 
-.container{
-max-width:800px;
-margin:auto;
-background:#fff;
-padding:25px;
-border-radius:15px;
-box-shadow:0 4px 15px rgba(0,0,0,0.1);
-}
+    h1 {
+      color: #111827;
+      margin-bottom: 5px;
+    }
 
-h1{
-color:#111827;
-}
+    .subtitle {
+      font-size: 15px;
+      color: #4b5563;
+      margin-bottom: 20px;
+    }
 
-input{
-margin:20px 0;
-}
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+      text-align: center;
+    }
 
-button{
-background:#2563eb;
-color:white;
-border:none;
-padding:12px 24px;
-border-radius:8px;
-cursor:pointer;
-font-size:16px;
-}
+    .feature-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      padding: 15px;
+      border-radius: 10px;
+    }
 
-button:hover{
-background:#1d4ed8;
-}
+    .feature-card .icon {
+      font-size: 24px;
+      display: block;
+      margin-bottom: 6px;
+    }
 
-.preview{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:10px;
-margin-top:20px;
-}
+    .feature-card h4 {
+      margin: 0 0 5px 0;
+      color: #1e293b;
+      font-size: 15px;
+    }
 
-.preview img{
-width:120px;
-height:auto;
-border-radius:8px;
-border:1px solid #ddd;
-}
+    .feature-card p {
+      margin: 0;
+      font-size: 12px;
+      color: #64748b;
+    }
 
-.back{
-display:inline-block;
-margin-top:20px;
-text-decoration:none;
-color:#2563eb;
-}
+    .how-it-works {
+      background: #eff6ff;
+      border-left: 4px solid #2563eb;
+      padding: 15px 20px;
+      border-radius: 6px;
+      margin: 20px 0 25px 0;
+      text-align: left;
+    }
 
-</style>
+    .how-it-works h3 {
+      margin: 0 0 8px 0;
+      font-size: 15px;
+      color: #1e3a8a;
+    }
+
+    .how-it-works ol {
+      margin: 0;
+      padding-left: 20px;
+      color: #334155;
+      font-size: 13px;
+    }
+
+    .how-it-works li {
+      margin-bottom: 4px;
+    }
+
+    input[type="file"] {
+      margin: 15px 0;
+    }
+
+    button {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    button:disabled {
+      background: #93c5fd;
+      cursor: not-allowed;
+    }
+
+    .preview {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .preview img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+
+    .back {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #2563eb;
+      font-size: 14px;
+    }
+  </style>
 </head>
-<body>
+  <body>
 
 <div class="container">
 
-<h1>📄 JPG to PDF Converter</h1>
+  <h1>📄 JPG to PDF Converter</h1>
+  <p class="subtitle">Convert your images into a single clean PDF document instantly. Fast, secure, and 100% free!</p>
 
-<p>Select one or multiple images and convert them into a PDF.</p>
+  <!-- Feature Highlights -->
+  <div class="features-grid">
+    <div class="feature-card">
+      <span class="icon">⚡</span>
+      <h4>Instant Conversion</h4>
+      <p>Processes your files inside your browser in seconds.</p>
+    </div>
+    <div class="feature-card">
+      <span class="icon">🔒</span>
+      <h4>100% Private</h4>
+      <p>Your photos are safe — nothing goes to any server.</p>
+    </div>
+    <div class="feature-card">
+      <span class="icon">🖼️</span>
+      <h4>Multi-Format</h4>
+      <p>Supports JPG, PNG, WEBP, and BMP images seamlessly.</p>
+    </div>
+  </div>
 
-<input type="file" id="imageInput" accept="image/*" multiple>
+  <!-- How it works guide -->
+  <div class="how-it-works">
+    <h3>How to convert?</h3>
+    <ol>
+      <li>Click <strong>Choose Files</strong> to select one or multiple images.</li>
+      <li>Check the visual previews below.</li>
+      <li>Click <strong>Convert to PDF</strong> to download your PDF instantly!</li>
+    </ol>
+  </div>
 
-<div class="preview" id="preview"></div>
+  <!-- Image Input -->
+  <input type="file" id="imageInput" accept="image/*" multiple>
 
-<br>
+  <!-- Preview Area -->
+  <div class="preview" id="preview"></div>
 
-<button onclick="convertToPDF()">Convert to PDF</button>
+  <br><br>
 
-<br>
+  <button id="convertBtn" onclick="convertToPDF()">Convert to PDF</button>
 
-<a href="index.html" class="back">⬅ Back to Home</a>
+  <br>
+
+  <a href="index.html" class="back">⬅ Back to Home</a>
 
 </div>
 
 <script>
+  const imageInput = document.getElementById("imageInput");
+  const preview = document.getElementById("preview");
+  const convertBtn = document.getElementById("convertBtn");
 
-const imageInput = document.getElementById("imageInput");
-const preview = document.getElementById("preview");
+  // Show Image Previews
+  imageInput.addEventListener("change", () => {
+    preview.innerHTML = "";
+    
+    Array.from(imageInput.files).forEach(file => {
+      const reader = new FileReader();
+      reader.onload = e => {
+        const img = document.createElement("img");
+        img.src = e.target.result;
+        preview.appendChild(img);
+      };
+      reader.readAsDataURL(file);
+    });
+  });
 
-imageInput.addEventListener("change", () => {
+  // Main PDF Generation Engine
+  async function convertToPDF() {
+    const files = imageInput.files;
 
-preview.innerHTML = "";
+    if (files.length === 0) {
+      alert("Please select at least one image.");
+      return;
+    }
 
-Array.from(imageInput.files).forEach(file => {
+    convertBtn.disabled = true;
+    convertBtn.innerText = "Converting...";
 
-const reader = new FileReader();
+    try {
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF("p", "mm", "a4");
 
-reader.onload = e => {
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      const margin = 10;
+      const maxW = pageWidth - (margin * 2);
+      const maxH = pageHeight - (margin * 2);
 
-const img = document.createElement("img");
-img.src = e.target.result;
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
 
-preview.appendChild(img);
+        const dataUrl = await new Promise(resolve => {
+          const reader = new FileReader();
+          reader.onload = e => resolve(e.target.result);
+          reader.readAsDataURL(file);
+        });
 
-};
+        const img = await new Promise(resolve => {
+          const image = new Image();
+          image.onload = () => resolve(image);
+          image.src = dataUrl;
+        });
 
-reader.readAsDataURL(file);
+        // Aspect Ratio Math
+        const ratio = Math.min(maxW / img.width, maxH / img.height);
+        const imgWidth = img.width * ratio;
+        const imgHeight = img.height * ratio;
 
-});
+        // Center Position
+        const xPos = (pageWidth - imgWidth) / 2;
+        const yPos = (pageHeight - imgHeight) / 2;
 
-});
+        if (i > 0) pdf.addPage();
 
-async function convertToPDF(){
+        pdf.addImage(dataUrl, "AUTO", xPos, yPos, imgWidth, imgHeight);
+      }
 
-const files = imageInput.files;
-
-if(files.length === 0){
-
-alert("Please select images.");
-return;
-
-}
-
-const { jsPDF } = window.jspdf;
-
-const pdf = new jsPDF("p","mm","a4");
-
-for(let i=0;i<files.length;i++){
-
-const file = files[i];
-
-const dataUrl = await new Promise(resolve=>{
-
-const reader = new FileReader();
-
-reader.onload = e => resolve(e.target.result);
-
-reader.readAsDataURL(file);
-
-});
-
-const img = await new Promise(resolve=>{
-
-const image = new Image();
-
-image.onload = ()=>resolve(image);
-
-image.src = dataUrl;
-
-});
-
-const pageWidth = 210;
-const pageHeight = 297;
-const margin = 10;
-
-const usableWidth = pageWidth - (margin*2);
-
-const imgWidth = usableWidth;
-const imgHeight = (img.height * imgWidth) / img.width;
-
-if(i>0){
-pdf.addPage();
-}
-
-pdf.addImage(
-dataUrl,
-"JPEG",
-margin,
-10,
-imgWidth,
-imgHeight,
-undefined,
-"SLOW"
-);
-
-}
-
-pdf.save("toolhub.pdf");
-
-}
-
+      pdf.save("toolhub.pdf");
+    } catch (err) {
+      alert("Something went wrong while generating the PDF.");
+      console.error(err);
+    } finally {
+      convertBtn.disabled = false;
+      convertBtn.innerText = "Convert to PDF";
+    }
+  }
 </script>
 
 </body>
 </html>
-```
