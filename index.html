@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ToolHub - Free PDF Tools, Image Tools & Online Utilities</title>
-    <meta name="description" content="Free online PDF tools, image tools and utilities. Convert JPG to PDF, PDF to JPG, merge PDF files, resize images, remove backgrounds, generate QR codes and more.">
+    <title>ToolHub - Free Online PDF Tools, Image Converter & Utilities</title>
+    <meta name="description" content="100% Free online PDF and Image tools. Convert JPG to PDF, merge files, resize images, remove background, extract OCR text, and generate QR codes instantly.">
     <meta name="keywords" content="pdf tools, image tools, free tools online, jpg to pdf, pdf to word, word to pdf, background remover, image enhancer, qr generator, online converter tools">
     <meta name="author" content="ToolHub">
     <meta name="robots" content="index, follow">
 
-    <!-- Netlify Canonical URL Fixed for Google Search Console -->
+    <!-- Netlify Canonical URL -->
     <link rel="canonical" href="https://elegant-tanuki-258163.netlify.app/" />
 
     <!-- Open Graph / Facebook / WhatsApp Presentation -->
@@ -26,6 +26,37 @@
     <meta property="twitter:title" content="ToolHub - Free PDF & Image Tools Online">
     <meta property="twitter:description" content="Convert JPG to PDF, merge files, resize images, remove backgrounds, and generate QR codes instantly without installation.">
     <meta property="twitter:image" content="https://elegant-tanuki-258163.netlify.app/assets/og-image.png">
+
+    <!-- FAQ Schema for Google Rich Snippets -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "Are the PDF and Image tools on ToolHub completely free to use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, all utilities, PDF converters, and image editing tools available on ToolHub are 100% free with no registration or subscription required."
+        }
+      },{
+        "@type": "Question",
+        "name": "Is my uploaded data safe and private?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Absolutely. Most of our tools process files directly inside your browser. Any server-side processing is encrypted, and files are automatically deleted after processing."
+        }
+      },{
+        "@type": "Question",
+        "name": "Do I need to install any software or extensions?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No installation is needed. ToolHub works entirely online within any modern Web Browser on PC, Mac, Android, or iOS."
+        }
+      }]
+    }
+    </script>
+
     <style>
         * {
             margin: 0;
@@ -37,7 +68,7 @@
         body {
             background: #f8fafc;
             color: #0f172a;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         nav {
@@ -118,14 +149,14 @@
         .section-title {
             text-align: center;
             margin: 45px 0 20px;
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 700;
             color: #1e293b;
         }
 
         .tools {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
             padding: 20px;
             max-width: 1200px;
@@ -152,7 +183,7 @@
 
         .card h3 {
             margin-bottom: 10px;
-            font-size: 18px;
+            font-size: 19px;
             color: #1e293b;
         }
 
@@ -180,18 +211,72 @@
             background: #1d4ed8;
         }
 
-        .about {
+        /* SEO Detailed Descriptions & FAQ Section */
+        .seo-section, .faq-section, .about {
             background: white;
-            padding: 60px 20px;
-            text-align: center;
-            margin-top: 60px;
-            border-top: 1px solid #e2e8f0;
+            padding: 50px 20px;
+            max-width: 1100px;
+            margin: 40px auto;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
 
-        .about h2 {
-            font-size: 28px;
+        .seo-section h2, .faq-section h2, .about h2 {
+            font-size: 26px;
             margin-bottom: 20px;
             color: #0f172a;
+            border-bottom: 2px solid #2563eb;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .seo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+            text-align: left;
+        }
+
+        .seo-item {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #2563eb;
+        }
+
+        .seo-item h4 {
+            font-size: 17px;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .seo-item p {
+            font-size: 14px;
+            color: #475569;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            text-align: left;
+            border-bottom: 1px solid #f1f5f9;
+            padding-bottom: 15px;
+        }
+
+        .faq-item h3 {
+            font-size: 18px;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .faq-item p {
+            font-size: 15px;
+            color: #475569;
+        }
+
+        .about {
+            text-align: center;
         }
 
         .about p {
@@ -271,13 +356,15 @@
     <h2>🚀 ToolHub</h2>
     <div class="nav-links">
         <a href="#tools">Tools</a>
+        <a href="#tool-details">Features</a>
+        <a href="#faq">FAQ</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
     </div>
 </nav>
 
 <div class="hero">
-    <h1>Free PDF Tools, Image Tools and Online Utilities</h1>
+    <h1>Free PDF Tools, Image Tools & Online Utilities</h1>
     <p>Convert PDF files, edit images, remove backgrounds, enhance photos, generate QR codes and use many free online tools instantly.</p>
 </div>
 
@@ -289,38 +376,38 @@
 <section class="tools">
     <div class="card">
         <h3>JPG to PDF</h3>
-        <p>Convert images to PDF files</p>
-        <a class="btn" href="jpg-to-pdf.html">Open</a>
+        <p>Convert images to high-quality PDF files instantly without losing resolution.</p>
+        <a class="btn" href="jpg-to-pdf.html">Open Tool</a>
     </div>
     <div class="card">
         <h3>PDF to JPG</h3>
-        <p>Convert PDF pages to images</p>
-        <a class="btn" href="pdf-to-jpg.html">Open</a>
+        <p>Extract and convert all PDF pages into high-resolution JPG images.</p>
+        <a class="btn" href="pdf-to-jpg.html">Open Tool</a>
     </div>
     <div class="card">
         <h3>PDF Merge</h3>
-        <p>Combine multiple PDFs</p>
-        <a class="btn" href="pdf-merge.html">Open</a>
+        <p>Combine multiple PDF documents into a single unified file effortlessly.</p>
+        <a class="btn" href="pdf-merge.html">Open Tool</a>
     </div>
     <div class="card">
         <h3>PDF Split</h3>
-        <p>Split PDF documents</p>
-        <a class="btn" href="pdf-split.html">Open</a>
+        <p>Extract specific pages or separate entire PDF files into multiple parts.</p>
+        <a class="btn" href="pdf-split.html">Open Tool</a>
     </div>
     <div class="card">
         <h3>PDF Rotate</h3>
-        <p>Rotate PDF pages</p>
-        <a class="btn" href="pdf-rotate.html">Open</a>
+        <p>Rotate individual or all pages inside your PDF to orientation.</p>
+        <a class="btn" href="pdf-rotate.html">Open Tool</a>
     </div>
     <div class="card">
         <h3>Word to PDF</h3>
-        <p>Convert DOCX files</p>
-        <a class="btn" href="word-to-pdf.html">Open</a>
+        <p>Convert Microsoft Word (DOC/DOCX) files into accurate PDF documents.</p>
+        <a class="btn" href="word-to-pdf.html">Open Tool</a>
     </div>
     <div class="card">
         <h3>PDF to Word</h3>
-        <p>Extract text from PDF</p>
-        <a class="btn" href="pdf-to-word.html">Open</a>
+        <p>Convert PDFs to editable Word documents with full layout preservation.</p>
+        <a class="btn" href="pdf-to-word.html">Open Tool</a>
     </div>
 </section>
 
@@ -328,33 +415,33 @@
 <section class="tools">
     <div class="card">
         <h3>Image Resizer</h3>
-        <p>Resize image dimensions</p>
-        <a class="btn" href="image-resizer.html">Open</a>
+        <p>Change pixel dimensions or resize images by percentage quickly.</p>
+        <a class="btn" href="image-resizer.html">Open Tool</a>
     </div>
     <div class="card">
         <h3>Image Cropper</h3>
-        <p>Crop images online</p>
-        <a class="btn" href="image-cropper.html">Open</a>
+        <p>Crop images to custom aspect ratios or predefined social media sizes.</p>
+        <a class="btn" href="image-cropper.html">Open Tool</a>
     </div>
     <div class="card">
         <h3>Image Enhancer</h3>
-        <p>Improve image quality</p>
-        <a class="btn" href="image-enhancer.html">Open</a>
+        <p>Adjust brightness, contrast, and sharpness to improve image quality.</p>
+        <a class="btn" href="image-enhancer.html">Open Tool</a>
     </div>
     <div class="card">
         <h3>Background Remover</h3>
-        <p>Remove image backgrounds</p>
-        <a class="btn" href="background-remover.html">Open</a>
+        <p>Remove backgrounds from photos automatically to get transparent PNGs.</p>
+        <a class="btn" href="background-remover.html">Open Tool</a>
     </div>
     <div class="card">
         <h3>JPG to PNG</h3>
-        <p>Convert JPG into PNG</p>
-        <a class="btn" href="jpg-to-png.html">Open</a>
+        <p>Convert JPG images to PNG format to support transparency.</p>
+        <a class="btn" href="jpg-to-png.html">Open Tool</a>
     </div>
     <div class="card">
         <h3>Image to Text</h3>
-        <p>OCR text extraction tool</p>
-        <a class="btn" href="image-to-text.html">Open</a>
+        <p>Extract editable text from images using smart OCR technology.</p>
+        <a class="btn" href="image-to-text.html">Open Tool</a>
     </div>
 </section>
 
@@ -362,48 +449,12 @@
 <section class="tools">
     <div class="card">
         <h3>QR Generator</h3>
-        <p>Create QR codes instantly</p>
-        <a class="btn" href="qr-generator.html">Open</a>
+        <p>Create custom, high-res QR codes for URLs, WiFi, contact info, and text.</p>
+        <a class="btn" href="qr-generator.html">Open Tool</a>
     </div>
     <div class="card">
         <h3>Text to PDF</h3>
-        <p>Convert text into PDF</p>
-        <a class="btn" href="text-to-pdf.html">Open</a>
+        <p>Convert raw plain text notes or copy into clean PDF documents.</p>
+        <a class="btn" href="text-to-pdf.html">Open Tool</a>
     </div>
 </section>
-
-<section class="about" id="about">
-    <h2>About ToolHub</h2>
-    <p>
-        ToolHub is a free online platform that offers a wide collection of PDF tools, image editing tools and utility tools. Our goal is to provide simple, fast and secure online tools that work directly in your browser.
-        With ToolHub, you can convert JPG to PDF, PDF to JPG, merge PDF files, split PDF documents, rotate PDFs, convert Word to PDF, resize images, crop images, enhance image quality, remove backgrounds, extract text from images and generate QR codes.
-        All tools are completely free to use and require no software installation. Whether you are a student, professional, designer or everyday user, ToolHub helps you complete common tasks quickly and efficiently.
-    </p>
-</section>
-
-<section class="contact" id="contact">
-    <h2>Contact Us</h2>
-    <input type="text" placeholder="Your Name">
-    <input type="email" placeholder="Your Email">
-    <textarea rows="4" placeholder="Message"></textarea>
-    <button type="button">Send Message</button>
-</section>
-
-<footer>
-    © 2026 ToolHub | All Rights Reserved
-</footer>
-
-<script>
-function filterTools(){
-    let input = document.getElementById("search").value.toLowerCase();
-    let cards = document.getElementsByClassName("card");
-
-    for(let i=0; i<cards.length; i++){
-        let text = cards[i].innerText.toLowerCase();
-        cards[i].classList.toggle("hidden", !text.includes(input));
-    }
-}
-</script>
-
-</body>
-</html>
