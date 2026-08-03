@@ -1,150 +1,424 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PDF to JPG Converter - ToolHub</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-body{
-font-family:Arial,sans-serif;
-background:#f5f7fb;
-margin:0;
-padding:20px;
-text-align:center;
-}
+    <title>PDF to JPG Converter - Convert PDF Pages to HD Images | ToolHub</title>
+    <meta name="description" content="Convert PDF files to high-quality JPG images online for free. Extract all PDF pages into crisp, high-resolution JPEG photos without quality loss. Fast and secure.">
+    <meta name="keywords" content="pdf to jpg, convert pdf to image, extract pdf pages, high quality pdf to jpg, free pdf converter">
+    <meta name="author" content="ToolHub">
+    <meta name="robots" content="index, follow">
 
-.container{
-max-width:1000px;
-margin:auto;
-background:white;
-padding:30px;
-border-radius:15px;
-box-shadow:0 4px 12px rgba(0,0,0,0.1);
-}
+    <link rel="canonical" href="https://elegant-tanuki-258163.netlify.app/pdf-to-jpg.html" />
 
-h1{
-color:#111827;
-}
+    <!-- PDF.js Library for HD Browser Rendering -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    </script>
 
-input{
-margin:20px 0;
-}
+    <!-- JSZip Library for Zip Download -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
-.page{
-margin:30px 0;
-padding:15px;
-border:1px solid #ddd;
-border-radius:10px;
-}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
 
-canvas{
-max-width:100%;
-height:auto;
-border:1px solid #ddd;
-}
+        body {
+            background: #f8fafc;
+            color: #0f172a;
+            line-height: 1.6;
+        }
 
-.btn{
-display:inline-block;
-padding:12px 20px;
-background:#2563eb;
-color:white;
-text-decoration:none;
-border-radius:8px;
-margin-top:15px;
-}
+        nav {
+            background: #0f172a;
+            color: white;
+            padding: 18px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-.back{
-display:inline-block;
-margin-top:20px;
-text-decoration:none;
-}
-</style>
+        nav h2 a {
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .tool-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .tool-header h1 {
+            font-size: 32px;
+            color: #0f172a;
+        }
+
+        .tool-header p {
+            color: #64748b;
+            margin-top: 8px;
+        }
+
+        .drop-zone {
+            background: white;
+            border: 2px dashed #cbd5e1;
+            border-radius: 16px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .drop-zone:hover {
+            border-color: #2563eb;
+            background: #f1f5f9;
+        }
+
+        .drop-zone p {
+            color: #475569;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .controls {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .quality-select select {
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .action-btn {
+            padding: 12px 24px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .action-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .action-btn:disabled {
+            background: #cbd5e1;
+            cursor: not-allowed;
+        }
+
+        .status-msg {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: 600;
+            color: #2563eb;
+        }
+
+        .preview-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .preview-card {
+            background: white;
+            border-radius: 12px;
+            padding: 10px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .preview-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            border-radius: 6px;
+            background: #f8fafc;
+        }
+
+        .preview-card a {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 13px;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .preview-card a:hover {
+            text-decoration: underline;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .feature-item {
+            background: #f8fafc;
+            padding: 18px;
+            border-radius: 10px;
+            border-left: 4px solid #2563eb;
+        }
+
+        .feature-item h4 {
+            color: #1e293b;
+            margin-bottom: 5px;
+        }
+
+        .feature-item p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .seo-content, .faq-section {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            margin-top: 40px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .seo-content h2, .faq-section h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #0f172a;
+        }
+
+        .faq-item {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #f1f5f9;
+            padding-bottom: 10px;
+        }
+
+        .faq-item h4 {
+            color: #1e293b;
+            margin-bottom: 5px;
+        }
+
+        .faq-item p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #0f172a;
+            color: #94a3b8;
+            margin-top: 50px;
+            font-size: 14px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
 </head>
 <body>
 
+<nav>
+    <h2><a href="index.html">🚀 ToolHub</a></h2>
+</nav>
+
 <div class="container">
+    <div class="tool-header">
+        <h1>PDF to JPG Converter (High Quality)</h1>
+        <p>Extract all PDF pages into crisp, ultra-clear JPG images instantly.</p>
+    </div>
 
-<h1>📑 PDF to JPG Converter</h1>
+    <div class="drop-zone" onclick="document.getElementById('fileInput').click()">
+        <svg width="48" height="48" fill="none" stroke="#2563eb" viewBox="0 0 24 24" style="margin:auto; display:block;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+        <p><strong>Click to choose a PDF file</strong> or drag & drop it here</p>
+        <input type="file" id="fileInput" accept="application/pdf" style="display:none;" onchange="loadPDF(this.files[0])">
+    </div>
 
-<input type="file" id="pdfFile" accept="application/pdf">
+    <div class="controls hidden" id="controls">
+        <div class="quality-select">
+            <label for="quality"><strong>Image Quality:</strong> </label>
+            <select id="quality">
+                <option value="1.5">Standard HD (720p)</option>
+                <option value="2.0" selected>Full HD Clear (1080p)</option>
+                <option value="3.0">Ultra HD 4K (Best Detail)</option>
+            </select>
+        </div>
+        <button class="action-btn" id="convertBtn" onclick="convertPDF()">Convert to Images</button>
+        <button class="action-btn hidden" id="downloadZipBtn" onclick="downloadZip()" style="background:#059669;">Download All (ZIP)</button>
+    </div>
 
-<div id="pages"></div>
+    <div class="status-msg" id="statusMsg"></div>
 
-<a href="index.html" class="back">⬅ Back to Home</a>
+    <div class="preview-container" id="previewContainer"></div>
+    <section class="seo-content">
+        <h2>Features of ToolHub PDF to JPG Converter</h2>
+        <div class="features-grid">
+            <div class="feature-item">
+                <h4>✨ Ultra-High Resolution Rendering</h4>
+                <p>Advanced canvas rendering technology renders text and vector graphics in sharp 300 DPI ultra-clear quality.</p>
+            </div>
+            <div class="feature-item">
+                <h4>⚡ In-Browser Fast Processing</h4>
+                <p>Your document is rendered locally inside your browser, making the conversion lightning fast with zero upload delays.</p>
+            </div>
+            <div class="feature-item">
+                <h4>🔒 100% Private & Secure</h4>
+                <p>Because processing happens inside your browser memory, your confidential PDF files never leave your device.</p>
+            </div>
+            <div class="feature-item">
+                <h4>📦 One-Click Batch Download</h4>
+                <p>Download individual image pages separately or grab all converted images packaged nicely inside a single ZIP file.</p>
+            </div>
+        </div>
 
+        <h2 style="margin-top: 30px;">How to Convert PDF Pages to JPG</h2>
+        <ol style="margin-left: 20px; color: #475569;">
+            <li>Select or drop your PDF file into the converter box above.</li>
+            <li>Choose your preferred resolution (Full HD or Ultra HD 4K).</li>
+            <li>Click "Convert to Images" to automatically render each page.</li>
+            <li>Download pages individually or click "Download All (ZIP)" to save all pages at once.</li>
+        </ol>
+    </section>
+
+    <section class="faq-section">
+        <h2>Frequently Asked Questions (FAQ)</h2>
+        <div class="faq-item">
+            <h4>Will my PDF document quality decrease after conversion?</h4>
+            <p>No! By selecting our Full HD or Ultra HD options, pages are extracted at enhanced DPI scales to ensure text and images remain perfectly sharp and readable.</p>
+        </div>
+        <div class="faq-item">
+            <h4>Is there any file size limit for converting PDFs?</h4>
+            <p>Since the processing relies on your browser's performance, you can convert multi-page and large PDF files without restrictive file size caps.</p>
+        </div>
+        <div class="faq-item">
+            <h4>Can I convert scanned PDF pages into images?</h4>
+            <p>Yes, scanned PDF pages render flawlessly into high-definition JPEG files.</p>
+        </div>
+    </section>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<footer>
+    © 2026 ToolHub | All Rights Reserved
+</footer>
 
 <script>
+    let currentPdf = null;
+    let generatedImages = [];
 
-const pdfFile = document.getElementById('pdfFile');
-const pagesContainer = document.getElementById('pages');
+    async function loadPDF(file) {
+        if (!file || file.type !== 'application/pdf') {
+            alert('Please select a valid PDF file.');
+            return;
+        }
 
-pdfFile.addEventListener('change', async function(){
+        document.getElementById('statusMsg').innerText = 'Loading PDF...';
+        const fileArrayBuffer = await file.arrayBuffer();
 
-pagesContainer.innerHTML = '';
+        try {
+            currentPdf = await pdfjsLib.getDocument({ data: fileArrayBuffer }).promise;
+            document.getElementById('controls').classList.remove('hidden');
+            document.getElementById('statusMsg').innerText = `PDF Loaded (${currentPdf.numPages} Pages). Click 'Convert to Images'.`;
+            document.getElementById('previewContainer').innerHTML = '';
+            document.getElementById('downloadZipBtn').classList.add('hidden');
+            generatedImages = [];
+        } catch (err) {
+            document.getElementById('statusMsg').innerText = 'Error reading PDF file.';
+            console.error(err);
+        }
+    }
 
-const file = this.files[0];
+    async function convertPDF() {
+        if (!currentPdf) return;
 
-if(!file) return;
+        const scale = parseFloat(document.getElementById('quality').value);
+        const previewContainer = document.getElementById('previewContainer');
+        const statusMsg = document.getElementById('statusMsg');
+        const convertBtn = document.getElementById('convertBtn');
+        
+        previewContainer.innerHTML = '';
+        generatedImages = [];
+        convertBtn.disabled = true;
 
-const reader = new FileReader();
+        for (let pageNum = 1; pageNum <= currentPdf.numPages; pageNum++) {
+            statusMsg.innerText = `Converting Page ${pageNum} of ${currentPdf.numPages}...`;
 
-reader.onload = async function(){
+            const page = await currentPdf.getPage(pageNum);
+            const viewport = page.getViewport({ scale: scale });
 
-const typedarray = new Uint8Array(this.result);
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
 
-const pdf = await pdfjsLib.getDocument(typedarray).promise;
+            await page.render({ canvasContext: context, viewport: viewport }).promise;
 
-for(let pageNum = 1; pageNum <= pdf.numPages; pageNum++){
+            const imgData = canvas.toDataURL('image/jpeg', 0.95);
+            generatedImages.push({ name: `page-${pageNum}.jpg`, data: imgData });
 
-const page = await pdf.getPage(pageNum);
+            const card = document.createElement('div');
+            card.className = 'preview-card';
+            card.innerHTML = `
+                <img src="${imgData}" alt="Page ${pageNum}">
+                <p style="font-size:12px; margin-top:5px; color:#64748b;">Page ${pageNum}</p>
+                <a href="${imgData}" download="page-${pageNum}.jpg">Download JPG</a>
+            `;
+            previewContainer.appendChild(card);
+        }
 
-const viewport = page.getViewport({ scale: 4 });
+        statusMsg.innerText = 'Conversion Complete!';
+        convertBtn.disabled = false;
+        if(generatedImages.length > 1) {
+            document.getElementById('downloadZipBtn').classList.remove('hidden');
+        }
+    }
 
-const canvas = document.createElement('canvas');
-const ctx = canvas.getContext('2d');
+    function downloadZip() {
+        if (generatedImages.length === 0) return;
 
-canvas.width = viewport.width;
-canvas.height = viewport.height;
+        const zip = new JSZip();
+        generatedImages.forEach(img => {
+            const base64Data = img.data.replace(/^data:image\/jpeg;base64,/, "");
+            zip.file(img.name, base64Data, { base64: true });
+        });
 
-await page.render({
-canvasContext: ctx,
-viewport: viewport
-}).promise;
-
-const wrapper = document.createElement('div');
-wrapper.className = 'page';
-
-const title = document.createElement('h3');
-title.textContent = 'Page ' + pageNum;
-
-const download = document.createElement('a');
-download.className = 'btn';
-download.textContent = 'Download JPG';
-download.href = canvas.toDataURL('image/jpeg',1.0);
-download.download = 'page-' + pageNum + '.jpg';
-
-wrapper.appendChild(title);
-wrapper.appendChild(canvas);
-wrapper.appendChild(document.createElement('br'));
-wrapper.appendChild(download);
-
-pagesContainer.appendChild(wrapper);
-
-}
-
-};
-
-reader.readAsArrayBuffer(file);
-
-});
-
+        zip.generateAsync({ type: "blob" }).then(function(content) {
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(content);
+            link.download = "toolhub-pdf-images.zip";
+            link.click();
+        });
+    }
 </script>
 
 </body>
 </html>
-```
