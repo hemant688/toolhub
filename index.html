@@ -458,3 +458,99 @@
         <a class="btn" href="text-to-pdf.html">Open Tool</a>
     </div>
 </section>
+    <!-- Detailed Tools Description for SEO Enhancement -->
+<section class="seo-section" id="tool-details">
+    <h2>Detailed Features & Descriptions</h2>
+    <div class="seo-grid">
+        <div class="seo-item">
+            <h4>JPG to PDF Converter</h4>
+            <p>Combine JPG, JPEG, or PNG images into a clean single PDF file. Perfect for generating PDF ebooks, scanning receipts, or uploading official image documents.</p>
+        </div>
+        <div class="seo-item">
+            <h4>PDF to JPG Extractor</h4>
+            <p>Save every page of a PDF document as an image file. Ideal for viewing PDFs on devices that don't support document viewers natively.</p>
+        </div>
+        <div class="seo-item">
+            <h4>PDF Merge Utility</h4>
+            <p>Combine multiple reports, scanned pages, or ebooks into a single PDF without installing bulky PDF editing software.</p>
+        </div>
+        <div class="seo-item">
+            <h4>PDF Splitter</h4>
+            <p>Select precise page numbers or custom page ranges to extract only the necessary pages from large PDF files.</p>
+        </div>
+        <div class="seo-item">
+            <h4>Image Background Remover</h4>
+            <p>Instant transparent background generation for product photography, profile pictures, and graphics design using in-browser processing.</p>
+        </div>
+        <div class="seo-item">
+            <h4>OCR Image to Text Converter</h4>
+            <p>Extract text from photos, screenshots, or scanned documents instantly using powerful optical character recognition (OCR).</p>
+        </div>
+        <div class="seo-item">
+            <h4>Custom QR Code Generator</h4>
+            <p>Generate downloadable QR codes for links, text, or business cards with customization options for instant scanning.</p>
+        </div>
+        <div class="seo-item">
+            <h4>Smart Image Resizer & Cropper</h4>
+            <p>Adjust image width, height, and framing without reducing visual fidelity, optimized for Instagram, Web, and print formats.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Frequently Asked Questions Section -->
+<section class="faq-section" id="faq">
+    <h2>Frequently Asked Questions (FAQ)</h2>
+    <div class="faq-item">
+        <h3>Are the tools on ToolHub 100% free to use?</h3>
+        <p>Yes! Every tool available on ToolHub is completely free. There are no hidden fees, subscriptions, or limits on daily usage.</p>
+    </div>
+    <div class="faq-item">
+        <h3>Is my data and file privacy safe with ToolHub?</h3>
+        <p>Your privacy is our top priority. Most tools process files directly inside your web browser. If server processing is required, your files are encrypted and automatically deleted immediately after download.</p>
+    </div>
+    <div class="faq-item">
+        <h3>Do I need to install any software to use ToolHub?</h3>
+        <p>No installation is needed. All online converters, PDF utilities, and image editors work directly within modern browsers like Google Chrome, Safari, Firefox, and Edge.</p>
+    </div>
+    <div class="faq-item">
+        <h3>Can I use ToolHub on my mobile phone?</h3>
+        <p>Yes! ToolHub is fully responsive and optimized to work seamlessly on smartphones, tablets, laptops, and desktop computers.</p>
+    </div>
+</section>
+
+<section class="about" id="about">
+    <h2>About ToolHub</h2>
+    <p>
+        ToolHub is a free online platform that offers a wide collection of PDF tools, image editing tools, and utility tools. Our goal is to provide simple, fast, and secure online tools that work directly in your browser. 
+        With ToolHub, you can convert JPG to PDF, PDF to JPG, merge PDF files, split PDF documents, rotate PDFs, convert Word to PDF, resize images, crop images, enhance image quality, remove backgrounds, extract text from images, and generate QR codes. 
+        All tools are completely free to use and require no software installation. Whether you are a student, professional, designer, or everyday user, ToolHub helps you complete common tasks quickly and efficiently.
+    </p>
+</section>
+
+<section class="contact" id="contact">
+    <h2>Contact Us</h2>
+    <input type="text" placeholder="Your Name">
+    <input type="email" placeholder="Your Email">
+    <textarea rows="4" placeholder="Message"></textarea>
+    <button type="button">Send Message</button>
+</section>
+
+<footer>
+    © 2026 ToolHub | All Rights Reserved
+</footer>
+
+<script>
+function filterTools(){
+    let input = document.getElementById("search").value.toLowerCase();
+    let cards = document.getElementsByClassName("card");
+
+    for(let i=0; i<cards.length; i++){
+        let text = cards[i].innerText.toLowerCase();
+        cards[i].classList.toggle("hidden", !text.includes(input));
+    }
+}
+</script>
+
+</body>
+</html>
+    
